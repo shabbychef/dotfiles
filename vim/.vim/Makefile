@@ -27,6 +27,6 @@ bundle/vundle :
 	git clone https://github.com/gmarik/vundle.git $@
 
 %.vim :
-	wget -t 4 -P colors/ http://vimcolorschemetest.googlecode.com/svn/colors/$(*F).vim
+	curl -Sso colors/$(*F).vim http://vimcolorschemetest.googlecode.com/svn/colors/$(*F).vim
 
 
