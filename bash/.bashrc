@@ -81,7 +81,7 @@ fi;
 #2FIX
 test -s ~/.aliases && . ~/.aliases
 # Source local defintions
-test -s ~/.bashrc_`hostname` && source ~/.bashrc_`hostname`
+test -s ~/.bashrc_`hostname -s` && source ~/.bashrc_`hostname -s`
 
 ## hello on login
 if [ $SHLVL -lt 1 ]; then 
