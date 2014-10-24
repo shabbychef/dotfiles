@@ -1,0 +1,36 @@
+:% s/DATE/\=strftime('%Y.%m.%d')/ge
+:% s/YEAR/\=strftime('%Y')/ge
+:if search('<+CURSOR+>')
+:  normal! "_da>
+:endif
+:finish
+# TITLE
+#
+# VERSION 0.1
+#
+# SVN: $Id$
+# Created: DATE
+# Copyright: Steven E. Pav, YEAR
+# Author: Steven E. Pav
+# Comments: Steven E. Pav
+
+FROM ubuntu
+
+MAINTAINER Steven E. Pav, steven@cerebellumcapital.com
+
+ENV DOCKFILE_REFRESHED_AT DATE
+
+# see http://crosbymichael.com/dockerfile-best-practices.html
+RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get upgrade -y
+
+<+CURSOR+>
+
+# always use array syntax:
+ENTRYPOINT ["echo","hi"]
+# ENTRYPOINT and CMD are better together:
+CMD ["hi"]
+
+#for vim modeline: (do not edit)
+# vim:nu:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=Dockerfile:ft=Dockerfile:fo=croql

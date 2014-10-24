@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/mnt/perugia/exported/spav/rcode/.deprecated_dude/DOC'
+let g:netrw_dirhist_2='/mnt/hdd/home/spav/trunk/Alpha/Modelling/code/matlab/sandbox'
+let g:netrw_dirhist_3='/home/spav/cci/jhackery/.git'
+let g:netrw_dirhist_4='/home/spav/cci/SharpeR/.git'
+let g:netrw_dirhist_5='/mnt/hdd/home/spav/trunk/Alpha/Modelling/code/julia/sandbox/sep'
+let g:netrw_dirhist_6='/home/spav/.vim'

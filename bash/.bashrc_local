@@ -1,0 +1,35 @@
+#
+# variables local to this machine.
+# 
+# * Tue Jun 26 2012 11:16:54 AM Steven E. Pav <steven@cerebellumcapital.com>
+
+##################################################################
+# systemy stuff#FOLDUP
+export EMAIL='root@localhost'
+#UNFOLD
+
+##################################################################
+# where is everything located?#FOLDUP
+#export TEXINPUTS=.:$HOME/sys/etc/tex:$HOME/work/math/TEX::
+#UNFOLD
+
+##################################################################
+# etc#FOLDUP
+#for lam/mpi
+export LYNX_CFG=~/.lynxrc
+#UNFOLD
+
+# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
+if [[ -f ~/.dir_colors ]]; then
+	eval `dircolors -b ~/.dir_colors`
+else
+	eval `dircolors -b /etc/DIR_COLORS`
+fi
+
+# get vim version and set it.
+VIMV=`vim --version | h -n 1 | perl -ane '$_ = $F[4];~s/\.//;print $_;w'`;
+export VIM="/usr/share/vim/vim$VIMV";
+unset VIMV
+export EDITOR=vim
+
+# vim:ts=4:sw=2:tw=180:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=sh:ft=sh:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
