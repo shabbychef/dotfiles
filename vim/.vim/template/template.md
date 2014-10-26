@@ -13,4 +13,4 @@ Author: Steven
 
 <+CURSOR+>
 
-[//]:# vim:ts=2:sw=2:tw=79:fdm=indent:syn=markdown:ft=markdown:ai:si:cin:nu:fo=croql:cino=p0t0c5(0: 
+[//]: # ( vim:ts=2:sw=2:tw=79:fdm=indent:syn=markdown:ft=markdown:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:   )
