@@ -13,4 +13,18 @@ Author: Steven
 
 <+CURSOR+>
 
+[link name](http://whatever.com/ "title")
+
+1. list
+2. list
+3. list
+
+* list
+* list
+* list
+
+**bold**
+_italic_
+
+
 [//]: # ( vim:ts=2:sw=2:tw=79:fdm=indent:syn=markdown:ft=markdown:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:   )
