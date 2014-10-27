@@ -4,6 +4,7 @@
 :  normal! "_da>
 :endif
 :finish
+# /usr/bin/r
 #
 # Created: DATE
 # Copyright: Steven E. Pav, YEAR
