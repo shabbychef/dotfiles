@@ -10,6 +10,7 @@ sudo apt-get install stow
 stow vim
 stow R
 stow bash
+stow ctags
 cd ~/.vim && make all && cd -
 ```
 

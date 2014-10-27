@@ -20,17 +20,26 @@ options(digits=4)
 options(error=utils::recover)
 
 # set a CRAN mirror
-			# r["CRAN"] <- "http://cran.cnr.berkeley.edu/";
+			# r["CRAN"] <- "http://cran.cnr.berkeley.edu/"; "http://cran.stat.ucla.edu" ?
 local({r <- getOption("repos"); 
 			r["CRAN"] <- "http://cran.rstudio.com/";
 			options(repos=r)})
 
-options(devtools.desc.author = 
-					'"Steven Pav <shabbychef@gmail.com> [aut,cre]"', 
-				devtools.desc.license = 
-					"LGPL-3")
+# identity
+local({
+	email <- Sys.getenv('EMAIL');
+	options(email = ifelse(nchar(email),email,"shabbychef@gmail.com"));
 
-options(github.user = 'shabbychef')
+	# devtools
+	options(devtools.desc.author = 
+						sprintf('"Steven Pav <%s> [aut,cre]"',options()$email), 
+					devtools.desc.license = 
+						"LGPL-3");
+
+	# github
+	gh.user <- Sys.getenv('GITHUB_USER');
+	options(github.user = ifelse(nchar(gh.user),gh.user,'shabbychef'));
+})
 
 # utilities
 
@@ -107,6 +116,14 @@ if (interactive()) {
 		}  # colorout
 
 	}
+}
+
+# Quandl
+if (require(utils) && require(Quandl)) {
+	quandl.auth <- Sys.getenv('QUANDL_AUTH')
+	options(quandl.auth = ifelse(nchar(quandl.auth),quandl.auth,""))
+	rm(quandl.auth)
+	Quandl.auth(options()$quandl.auth)
 }
 
 # called on finish
