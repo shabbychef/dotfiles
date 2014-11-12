@@ -11,6 +11,7 @@ stow vim
 stow R
 stow bash
 stow ctags
+stow tmux
 cd ~/.vim && make all && cd -
 ```
 
