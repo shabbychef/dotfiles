@@ -1,0 +1,49 @@
+# see:
+#  https://github.com/rafmagana/screenrc/blob/master/.screenrc
+#  https://github.com/oren/ubuntu-configuration-files/blob/master/.screenrc
+#  https://bbs.archlinux.org/viewtopic.php?id=55618
+# 
+
+startup_message off
+
+# if we accidentally hangup, don't be all attached when we come back. 
+autodetach on
+
+# more scrollbacks!
+# defscrollback 20000
+
+# disable use of the "alternate" terminal
+# thus allowing scrollbars to function as normal in
+# many terminal emulators! <3 it
+#termcapinfo xterm* ti@:te@
+
+# have screen update terminal emulators titlebar
+#termcapinfo xterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'
+# defhstatus "screen ^E (^Et) | $USER@^EH"
+
+# but dont print i.e. "bell in window 0" status craps
+#hardstatus off
+
+shelltitle "$ |bash"
+
+# hardstatus alwayslastline
+# hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
+
+#defflow off
+
+#rvm needs this
+#shell -${SHELL}
+
+
+# if you open any screen then you get all of these: bleah:
+ screen -t three 3 bash
+screen -t two 2 bash
+screen -t one 1 bash
+screen -t zero 0 bash
+#screen -t r 4 R
+
+#bind R screen -t r R
+#bind V screen -t vim vim
+#bind J screen -t julia /home/spav/var/build/julia/julia 
+
+# vim:syn=screen:ft=screen
