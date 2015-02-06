@@ -1,5 +1,7 @@
 :% s/DATE/\=strftime('%Y.%m.%d')/ge
 :% s/YEAR/\=strftime('%Y')/ge
+:% s/EMAILATAT/\=substitute($EMAIL,"@","@@","")/ge
+:% s/EMAIL/\=$EMAIL/ge
 :if search('<+CURSOR+>')
 :  normal! "_da>
 :endif
@@ -8,7 +10,7 @@
 #
 # Created: DATE
 # Copyright: Steven E. Pav, YEAR
-# Author: Steven E. Pav
+# Author: Steven E. Pav <EMAIL>
 # Comments: Steven E. Pav
 
 #' @title A function.
@@ -52,6 +54,11 @@
 #' @export 
 #' @template etc
 #' @template sr
+#' @references
+#'
+#' Johnson, N. L., and Welch, B. L. "Applications of the non-central t-distribution."
+#' Biometrika 31, no. 3-4 (1940): 362-389. \url{http://dx.doi.org/10.1093/biomet/31.3-4.362}
+#'
 #' @examples 
 #' rvs <- rsr(128, 253*6, 0, 253)
 #' dvs <- dsr(rvs, 253*6, 0, 253)
@@ -61,7 +68,7 @@
 #' plot(ecdf(pvs.H0))
 #' plot(ecdf(pvs.HA))
 #' }
-#' @author Steven E. Pav \email{steven@@cerebellumcapital.com}
+#' @author Steven E. Pav \email{EMAILATAT}
 
 <+CURSOR+>
 

@@ -190,6 +190,10 @@ filetype plugin indent on     " required!
 	" adding the chomp part. fingers crossed.
 	iab ZUU <C-R>=system('uuidgen \| perl -pe chomp')<CR>
 
+	" get rid of YDZ?
+	iab NUHED <C-R>=strftime("* %a %b %d %Y %X Steven E. Pav <steven@cerebellumcapital.com>\n")<CR><ESC>!!uuidgen<CR>guuIID: <ESC>o SCENARIO: <CR><CR><ESC>VkkzfzokkVjjjj,cljElEl
+	iab NUCON <C-R>=strftime("* %a %b %d %Y %X Steven E. Pav <steven@cerebellumcapital.com>\n")<CR><ESC>!!uuidgen<CR>guuIID: <ESC>o continuing: <ESC>Vkk,cl
+
   "iab YDZ <C-R>=strftime("* %a %b %d %Y %X Steven E. Pav <steven@cerebellumcapital.com>")<CR> system('uuidgen')
   "iab YDZ <C-R>=strftime("* %a %b %d %Y %X Steven E. Pav <steven@cerebellumcapital.com>\n%s",system('uuidgen'))<CR>
 	"func MYZZZ()
@@ -315,7 +319,7 @@ map <C-F1> <nop>
 " matlab templates. 2FIX:"{{{
 	fun! MatlabSkeleton()
 		" call m4
-		:exe "0r ! m4 --include=/home/spav/crepo/m4 -DFUNCTION_NAME=" . expand("%:t:r") . " /home/spav/crepo/m4/blankheader.m4"
+		:exe "0r ! m4 --include=/home/spav/matlab/m4 -DFUNCTION_NAME=" . expand("%:t:r") . " /home/spav/matlab/m4/blankheader.m4"
 		" this goes to the last line of the file (which, annoyingly, is blank)
 		:%
 		" kill the current line (the empty last)
@@ -330,11 +334,11 @@ map <C-F1> <nop>
 			let s:topic=" -DTOPIC=" . a:1 
 		endif
 		" call m4
-		:exe "r ! m4 --include=/home/spav/crepo/m4" . s:topic . " /home/spav/crepo/m4/blog_skel.m4"
+		:exe "r ! m4 --include=/home/spav/matlab/m4" . s:topic . " /home/spav/matlab/m4/blog_skel.m4"
 	endfun
 	fun! DiarySkeleton()
 		" call m4
-		:exe "r ! m4 --include=/home/spav/crepo/m4 /home/spav/crepo/m4/diary.m4"
+		:exe "r ! m4 --include=/home/spav/matlab/m4 /home/spav/matlab/m4/diary.m4"
 	endfun
 "}}}
 
@@ -353,7 +357,7 @@ map <C-F1> <nop>
 			 " forget this, let the template files do it instead.
 			 " au BufNewFile *.m call MatlabSkeleton()
 			 " old way;
-			 " au BufNewFile *.m 0r ~/crepo/blankheader.txt
+			 " au BufNewFile *.m 0r ~/matlab/blankheader.txt
 		 augroup END
   endif
 
