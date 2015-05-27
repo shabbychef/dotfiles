@@ -30,7 +30,8 @@ set runtimepath=~/.vim,/usr/share/vim-conque,$VIMRUNTIME,~/.vim/after
 set nocompatible
 filetype off  " required!
 
-set rtp+=~/.vim/bundle/vundle
+"set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " github repos
@@ -66,6 +67,10 @@ Bundle 'Gist.vim'
 "Bundle 'ack.vim'
 "Bundle 'FuzzyFinder'
 "Bundle 'git://git.wincent.com/command-t.git'
+Bundle 'tpope/vim-speeddating'
+
+" for colors?
+Bundle 'altercation/vim-colors-solarized'
 
 " get one of these:
 " http://vim.wikia.com/wiki/Snippet_Plugin_Comparison

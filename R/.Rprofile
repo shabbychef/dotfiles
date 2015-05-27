@@ -25,6 +25,13 @@ local({r <- getOption("repos");
 			r["CRAN"] <- "http://cran.rstudio.com/";
 			options(repos=r)})
 
+local({
+if (require(drat)) {
+	drat::addRepo("eddelbuettel")
+	drat::addRepo("shabbychef")
+}
+})
+
 # identity
 local({
 	email <- Sys.getenv('EMAIL');
