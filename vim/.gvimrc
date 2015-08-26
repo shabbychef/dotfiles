@@ -34,7 +34,8 @@ version 6.0
 	" these all work?
 	"set gfn=Courier\ 10\ Pitch\ 14
 	"set gfn=Courier\ 10\ Pitch\ 13
-	set gfn=Courier\ 10\ Pitch\ 12
+	"set gfn=Courier\ 10\ Pitch\ 12
+	set gfn=Courier\ 10\ Pitch\ 18
 	" for the conference room:
 	"set gfn=Courier\ 10\ Pitch\ 24
 	

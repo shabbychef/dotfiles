@@ -184,7 +184,8 @@ filetype plugin indent on     " required!
 " ===================================================================
   iab teh       the
   iab YDME <C-R>=strftime("* %a %b %d %Y Steven E. Pav <steven@cerebellumcapital.com>")<CR>
-  iab YDHMONLY <C-R>=strftime("%a %b %d %Y %X")<CR>
+  "iab YDHMONLY <C-R>=strftime("%a %b %d %Y %X")<CR>
+  iab YDHMONLY <C-R>=strftime("%a %b %d %Y %T")<CR>
   iab YDHME <C-R>=strftime("* %a %b %d %Y %X Steven E. Pav <steven@cerebellumcapital.com>")<CR>
   iab SIGNIT <C-R>=strftime("* %a %b %d %Y %X Steven E. Pav <shabbychef@gmail.com>")<CR>
 	" adding the chomp part. fingers crossed.
