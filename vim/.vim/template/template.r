@@ -2,6 +2,9 @@
 :% s/YEAR/\=strftime('%Y')/ge
 :% s/EMAILATAT/\=substitute($EMAIL,"@","@@","")/ge
 :% s/EMAIL/\=$EMAIL/ge
+:% s/THEFILENAME/\=expand("%:t")/g
+:% s/THEFUNCNAME/\=expand("%:t:r")/g
+:% s/CLASS/\=expand("%:p:h:t:r")/g
 :if search('<+CURSOR+>')
 :  normal! "_da>
 :endif
@@ -13,7 +16,7 @@
 # Author: Steven E. Pav <EMAIL>
 # Comments: Steven E. Pav
 
-#' @title A function.
+#' @title THEFUNCNAME .
 #'
 #' @description 
 #'
@@ -31,7 +34,7 @@
 #'
 #' @usage
 #'
-#' funcname(x, n, zeta, ...)
+#' THEFUNCNAME(x, n, zeta, ...)
 #'
 #' @param x vector of blah
 #' @param n number of blah
@@ -51,26 +54,42 @@
 #' @seealso t-distribution functions, \code{\link{dt}, \link{pt}, \link{qt}, \link{rt}}
 #' @note
 #' This is a thin wrapper on the t distribution. 
-#' @export 
 #' @template etc
 #' @template sr
+#' @template CLASS
 #' @references
 #'
 #' Johnson, N. L., and Welch, B. L. "Applications of the non-central t-distribution."
 #' Biometrika 31, no. 3-4 (1940): 362-389. \url{http://dx.doi.org/10.1093/biomet/31.3-4.362}
 #'
 #' @examples 
-#' rvs <- rsr(128, 253*6, 0, 253)
-#' dvs <- dsr(rvs, 253*6, 0, 253)
-#' pvs.H0 <- psr(rvs, 253*6, 0, 253)
-#' pvs.HA <- psr(rvs, 253*6, 1, 253)
+#' y <- THEFUNCNAME(20, 10)
 #' \dontrun{
-#' plot(ecdf(pvs.H0))
-#' plot(ecdf(pvs.HA))
+#' y <- THEFUNCNAME(20, 10)
 #' }
 #' @author Steven E. Pav \email{EMAILATAT}
+#' @export
+THEFUNCNAME <- function(x, n, zeta, type=c('mean','median','mad'),...) {
+	type <- match.arg(type)
 
 <+CURSOR+>
+
+}
+
+suppressMessages(library(docopt))       # we need docopt (>= 0.3) as on CRAN
+
+doc <- "Usage: THEFILENAME [-v] [-H <HOST>] [-p <PORT>] [-u <USER>] [-P <PASSWORD>] [-d <DBNAME>] [-t <TNAME>] ARG
+
+-H HOST --host=HOST              Give the host name [default: 0.0.0.0]
+-p PORT --port=PORT              Give the port number [default: 21904]
+-u USER --user=USER              Give the user [default: dbuser]
+-P PASSWORD --password=PASSWORD  Give the password [default: mypasswrd]
+-d DBNAME --dbname=DBNAME        Give the database name [default: db_name]
+-t TNAME --tname=TNAME           Give the table name [default: db_table]
+-v --verbose                     Be more verbose
+-h --help                        show this help text"
+
+opt <- docopt(doc)
 
 #for vim modeline: (do not edit)
 # vim:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=r:ft=r

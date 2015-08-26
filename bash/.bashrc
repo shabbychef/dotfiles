@@ -29,6 +29,9 @@ fi
 # Source global defintions
 test -f /etc/bash.bashrc && . /etc/bash.bashrc
 
+# Source global defintions
+test -f /etc/bash_completion && . /etc/bash_completion
+
 # Smart way of setting the DISPLAY variable (from Hans) :)
 if test -z "$DISPLAY" -a "$TERM" = "xterm" -a -x /usr/bin/who ; then
     WHOAMI="`/usr/bin/who am i`"

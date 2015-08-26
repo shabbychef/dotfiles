@@ -29,8 +29,9 @@ local({r <- getOption("repos");
 local({
 	if (require(drat)) {
 		options(dratRepo="/home/spav/github/drat")
-		drat:::add('shabbychef')
-		drat:::add('ghrr')
+		drat:::addRepo("eddelbuettel")
+		drat:::addRepo('shabbychef')
+		drat:::addRepo('ghrr')
 	}
 })
 

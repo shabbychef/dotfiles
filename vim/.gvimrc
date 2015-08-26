@@ -1,13 +1,16 @@
 version 6.0
+
 	" suck up .vimrc
 	source ~/.vimrc
 	" now gui specific stuff
   	set toolbar:
-  	colorscheme default
+  	"colorscheme default
   	colorscheme slate
-  	colorscheme matrix
+  	"colorscheme matrix
   	colorscheme revolutions
-  set guioptions=agirtT
+  	colorscheme solarized
+  set guioptions=agiRt
+  set guioptions-=T
   set guiheadroom=10
   "set gfn=-b&h-lucidatypewriter-medium-r-normal-*-*-175-*-*-m-*-iso8859-1
   "set gfs=-*-*-medium-r-normal--24-*-*-*-c-*-*-*
@@ -38,6 +41,7 @@ version 6.0
 	set gfn=Courier\ 10\ Pitch\ 18
 	" for the conference room:
 	"set gfn=Courier\ 10\ Pitch\ 24
+	set gfn=DejaVu\ Sans\ Mono\ Bold\ 14
 	
 	"or try 
 	"set gfn=*
