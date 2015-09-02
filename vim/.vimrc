@@ -30,8 +30,8 @@ set runtimepath=~/.vim,/usr/share/vim-conque,$VIMRUNTIME,~/.vim/after
 set nocompatible
 filetype off  " required!
 
-"set rtp+=~/.vim/bundle/vundle
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/vundle
+"set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " github repos
@@ -87,6 +87,9 @@ filetype plugin indent on     " required!
 " my dealio
 "filetype plugin on
 "}}}
+
+let g:my_name = "Steven E. Pav"
+let g:my_email = "steven@gilgamath.com"
 
 " basic stuff"{{{
   set autowrite
@@ -188,20 +191,16 @@ filetype plugin indent on     " required!
 " ABbreviations"{{{
 " ===================================================================
   iab teh       the
-  iab YDME <C-R>=strftime("* %a %b %d %Y Steven E. Pav <steven@cerebellumcapital.com>")<CR>
+  iab YDME <C-R>=strftime("* %a %b %d %Y ")<CR><C-R>=g:my_name<CR> <C-R>=g:my_email<CR> 
   "iab YDHMONLY <C-R>=strftime("%a %b %d %Y %X")<CR>
   iab YDHMONLY <C-R>=strftime("%a %b %d %Y %T")<CR>
-  iab YDHME <C-R>=strftime("* %a %b %d %Y %X Steven E. Pav <steven@cerebellumcapital.com>")<CR>
-  iab SIGNIT <C-R>=strftime("* %a %b %d %Y %X Steven E. Pav <shabbychef@gmail.com>")<CR>
+  iab YDHME <C-R>=strftime("* %a %b %d %Y %X ")<CR><C-R>=g:my_name<CR> <C-R>=g:my_email<CR>
 	" adding the chomp part. fingers crossed.
 	iab ZUU <C-R>=system('uuidgen \| perl -pe chomp')<CR>
 
-	" get rid of YDZ?
-	iab NUHED <C-R>=strftime("* %a %b %d %Y %X Steven E. Pav <steven@cerebellumcapital.com>\n")<CR><ESC>!!uuidgen<CR>guuIID: <ESC>o SCENARIO: <CR><CR><ESC>VkkzfzokkVjjjj,cljElEl
-	iab NUCON <C-R>=strftime("* %a %b %d %Y %X Steven E. Pav <steven@cerebellumcapital.com>\n")<CR><ESC>!!uuidgen<CR>guuIID: <ESC>o continuing: <ESC>Vkk,cl
+	iab NUHED <C-R>=strftime("* %a %b %d %Y %X ")<CR><C-R>=g:my_name<CR> <C-R>=g:my_email<CR><ESC>o<ESC>!!uuidgen<CR>guuIID: <ESC>o SCENARIO: <CR><CR><ESC>VkkzfzokkVjjjj,cljElEl
+	iab NUCON <C-R>=strftime("* %a %b %d %Y %X ")<CR><C-R>=g:my_name<CR> <C-R>=g:my_email<CR><ESC>o<ESC>!!uuidgen<CR>guuIID: <ESC>o continuing: <ESC>Vkk,cl
 
-  "iab YDZ <C-R>=strftime("* %a %b %d %Y %X Steven E. Pav <steven@cerebellumcapital.com>")<CR> system('uuidgen')
-  "iab YDZ <C-R>=strftime("* %a %b %d %Y %X Steven E. Pav <steven@cerebellumcapital.com>\n%s",system('uuidgen'))<CR>
 	"func MYZZZ()
 		"return =strftime("* %a %b %d %Y %X Steven E. Pav <steven@cerebellumcapital.com>\n"),system('uuidgen')
 	"endfunc
