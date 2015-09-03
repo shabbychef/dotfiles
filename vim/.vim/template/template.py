@@ -1,3 +1,5 @@
+:% s/MY_FULL_NAME/\=g:my_name/ge
+:% s/MY_EMAIL/\=g:my_email/ge
 :% s/DATE/\=strftime('%Y.%m.%d')/ge
 :% s/YEAR/\=strftime('%Y')/ge
 :% s/CLASS/\=expand("%:p:h:t:r")/g
@@ -12,13 +14,13 @@
 .. module CLASS:: CLASS
    :synopsis: something it does.
 
-.. moduleauthor: Steven E. Pav <steven@cerebellumcapital.com>
+.. moduleauthor: MY_FULL_NAME <MY_EMAIL>
 
     SVN: $Id$
     Created: DATE
-    Copyright: Steven E. Pav, YEAR
-    Author: Steven E. Pav
-    Comments: Steven E. Pav
+    Copyright: MY_FULL_NAME, YEAR
+    Author: MY_FULL_NAME
+    Comments: MY_FULL_NAME
 """
 
 class Foo(dict):

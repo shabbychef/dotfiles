@@ -32,6 +32,7 @@
 #unset VIMV
 export EDITOR=vim
 export EMAIL=shabbychef@gmail.com
+export FULL_NAME='Steven E. Pav'
 
 export R_QUANDL_AUTH=ASDFASDFSADFSDFSADFASDFASDFASDF
 

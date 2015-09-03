@@ -1,3 +1,5 @@
+:% s/MY_FULL_NAME/\=g:my_name/ge
+:% s/MY_EMAIL/\=g:my_email/ge
 :% s/DATE/\=strftime('%Y.%m.%d')/ge
 :% s/YEAR/\=strftime('%Y')/ge
 :if search('<+CURSOR+>')
@@ -7,9 +9,9 @@
 #!/bin/bash -e
 #
 # Created: DATE
-# Copyright: Steven E. Pav, YEAR
-# Author: Steven E. Pav
-# Comments: Steven E. Pav
+# Copyright: MY_FULL_NAME, YEAR
+# Author: MY_FULL_NAME
+# Comments: MY_FULL_NAME
 
 <+CURSOR+>
 

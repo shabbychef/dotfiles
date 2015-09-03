@@ -18,6 +18,7 @@ options(editor="vim")
 options(tab.width=2) 
 options(digits=4)
 options(error=utils::recover)
+options(max.print=999)
 
 # set a CRAN mirror
 			# r["CRAN"] <- "http://cran.cnr.berkeley.edu/"; "http://cran.stat.ucla.edu" ?

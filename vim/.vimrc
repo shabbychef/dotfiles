@@ -88,8 +88,10 @@ filetype plugin indent on     " required!
 "filetype plugin on
 "}}}
 
-let g:my_name = "Steven E. Pav"
-let g:my_email = "steven@gilgamath.com"
+" these should be set from the environment, then they can be
+" used in vimscript.
+let g:my_name = $FULL_NAME
+let g:my_email = $EMAIL
 
 " basic stuff"{{{
   set autowrite

@@ -1,3 +1,5 @@
+:% s/MY_FULL_NAME/\=g:my_name/ge
+:% s/MY_EMAIL/\=g:my_email/ge
 :% s/DATE/\=strftime('%Y.%m.%d')/ge
 :% s/YEAR/\=strftime('%Y')/ge
 :% s/EMAILATAT/\=substitute($EMAIL,"@","@@","")/ge
@@ -12,9 +14,9 @@
 # /usr/bin/r
 #
 # Created: DATE
-# Copyright: Steven E. Pav, YEAR
-# Author: Steven E. Pav <EMAIL>
-# Comments: Steven E. Pav
+# Copyright: MY_FULL_NAME, YEAR
+# Author: MY_FULL_NAME <EMAIL>
+# Comments: MY_FULL_NAME
 
 #' @title THEFUNCNAME .
 #'
@@ -67,7 +69,7 @@
 #' \dontrun{
 #' y <- THEFUNCNAME(20, 10)
 #' }
-#' @author Steven E. Pav \email{EMAILATAT}
+#' @author MY_FULL_NAME \email{EMAILATAT}
 #' @export
 THEFUNCNAME <- function(x, n, zeta, type=c('mean','median','mad'),...) {
 	type <- match.arg(type)
