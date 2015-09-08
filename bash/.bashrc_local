@@ -37,5 +37,7 @@ export FULL_NAME='Steven E. Pav'
 export R_QUANDL_AUTH=ASDFASDFSADFSDFSADFASDFASDFASDF
 
 export GOPATH=/home/spav/gocode
+# lesskey is fucked.
+export LESSOPEN='|/bin/lesspipe %s'
 
 # vim:ts=4:sw=2:tw=180:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=sh:ft=sh:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
