@@ -1,13 +1,14 @@
  #!/bin/sh
 
 # see also https://github.com/suriya/dot-files/blob/master/lessfilter
+# and https://github.com/majutsushi/etc/blob/master/less/lessfilter
 
 case "$1" in
 	 *.h5)
 			 h5dump "$1"
 			 ;;
    *.gz)
-			 zcat "$1"
+			 gzip -dc "$1"
 			 ;;
 	 *)
 			 # We don't handle this format.
