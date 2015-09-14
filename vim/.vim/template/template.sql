@@ -11,11 +11,11 @@
 :  normal! "_da>
 :endif
 :finish
-#
-# Created: DATE
-# Copyright: MY_FULL_NAME, YEAR
-# Author: MY_FULL_NAME <EMAIL>
-# Comments: MY_FULL_NAME
+--
+-- Created: DATE
+-- Copyright: MY_FULL_NAME, YEAR
+-- Author: MY_FULL_NAME <EMAIL>
+-- Comments: MY_FULL_NAME
 
 CREATE TABLE `Fun` (
 	`id` int(11) unsigned NOT NULL auto_increment,
@@ -25,5 +25,5 @@ CREATE TABLE `Fun` (
 ) ENGINE=InnoDB;
 CREATE INDEX fun_index ON Fun(name)
 
-#for vim modeline: (do not edit)
-# vim:ts=2:sw=2:tw=79:fdm=indent:cms=#%s:syn=mysql:ft=mysql:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
+--for vim modeline: (do not edit)
+-- vim:ts=2:sw=2:tw=79:fdm=indent:cms=--%s:syn=mysql:ft=mysql:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
