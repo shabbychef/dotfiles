@@ -9,6 +9,13 @@
 " I tried 
 " $ vim-addons disable enhanced-commentify
 "
+" 2FIX: someday incorporate the excellent suggestions here:
+" http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+"
+" woot! vim stackexchange!
+"
+" http://vi.stackexchange.com/ 
+"
 
 " http://stackoverflow.com/questions/7154878/debugging-vim-plugin-loading
 "set verbose=10
