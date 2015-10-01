@@ -517,5 +517,12 @@ endif
   set modelines=2
 "}}}
 
+
+" misc
+" http://stackoverflow.com/q/15880689/164611
+" nnoremap <leader>o :silent !xdg-open %:p:h/<cfile>&<CR>
+" see also http://vi.stackexchange.com/q/744/4686
+nnoremap <leader>o :silent ! nohup xdg-open http://rseek.org/?q=%:p:h&<CR>
+
 " modelines
 " vim:ts=2:sw=2:fdm=marker:cms=\"%s:syn=vim:ft=vim:ai:cin:nu:fo=croql:cino=p0t0c5(0:
