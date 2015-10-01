@@ -100,6 +100,9 @@ filetype plugin indent on     " required!
 let g:my_name = $FULL_NAME
 let g:my_email = $EMAIL
 
+let g:org_todo_keywords=['TODO','DONE','WONT']
+
+
 " basic stuff"{{{
   set autowrite
   set backspace=2

@@ -42,7 +42,21 @@ version 6.0
 	" for the conference room:
 	"set gfn=Courier\ 10\ Pitch\ 24
 	set gfn=DejaVu\ Sans\ Mono\ Bold\ 14
-	
+
 	"or try 
 	"set gfn=*
+	
+	" http://vim.wikia.com/wiki/Maximize_or_set_initial_window_size
+	if has("gui_running")
+		set lines=47 
+		set columns=172
+	else
+		if exists("+lines")
+			set lines=47
+		endif
+		if exists("+columns")
+			set columns=172
+		endif
+	endif
 
+" vim: nu:ai
