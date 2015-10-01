@@ -47,5 +47,11 @@ default : all
 		$(PRETEX) $(LATEX) $< | grep 'DEP:' | perl -pe 's/DEP://;s/\\hbox {}//g;' >> $@
 		echo \} >> $@;
 
+# this is a 'catchall' but it fucks up make -n calls and so on...
+% : 
+	@-echo "target $* unknown;"
+	@-echo "known targets:"
+	@-make --silent help
+
 #for vim modeline: (do not edit)
 # vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:tags=.tags;:syn=make:ft=make:ai:si:cin:nu:fo=croqt:cino=p0t0c5(0:
