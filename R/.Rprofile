@@ -64,7 +64,9 @@ if (interactive()) {
 	if (nzchar(cols)) {
 		options(width=as.integer(cols))
 	} else {
-		try(cols <- system('tput -Txterm cols',intern=TRUE),silent=TRUE)
+		# without -Txterm you get current terminal, which is better
+		#try(cols <- system('tput -Txterm cols',intern=TRUE),silent=TRUE)
+		try(cols <- system('tput cols',intern=TRUE),silent=TRUE)
 		if (nzchar(cols)) {
 			options(width=as.integer(cols))
 		}

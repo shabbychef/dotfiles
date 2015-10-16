@@ -1,0 +1,19 @@
+# aliases, functions and settings which are 
+# useful just about everywhere (for me)
+#
+# Steven E. Pav
+
+export GREP_OPTIONS='--color=always'
+
+# find by extension and print. very useful.
+# fex R finds all R files.
+fex() {
+  find . -name '*.'$1 -type f -print
+}
+
+# R install on the command line. slick.
+rinstall() {
+	sudo r /usr/share/doc/littler/examples/install2.r -r http://CRAN.rstudio.com/ $@
+}
+
+# vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=sh:ft=sh:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
