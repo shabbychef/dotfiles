@@ -11,9 +11,15 @@ fex() {
   find . -name '*.'$1 -type f -print
 }
 
+alias lsh='ls -alhS'
+
 # R install on the command line. slick.
 rinstall() {
 	sudo r /usr/share/doc/littler/examples/install2.r -r http://CRAN.rstudio.com/ $@
 }
+
+alias dc='docker-compose'
+alias dcr='docker-compose run'
+alias dcrr='docker-compose run --rm'
 
 # vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=sh:ft=sh:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
