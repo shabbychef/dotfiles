@@ -521,11 +521,43 @@ endif
 "}}}
 
 
+
+
 " misc
 " http://stackoverflow.com/q/15880689/164611
 " nnoremap <leader>o :silent !xdg-open %:p:h/<cfile>&<CR>
 " see also http://vi.stackexchange.com/q/744/4686
-nnoremap <leader>o :silent ! nohup xdg-open http://rseek.org/?q=%:p:h&<CR>
+function! XDGopen(myurl)
+	silent execute "! nohup xdg-open '" . a:myurl . "' &"
+endfunction
+
+"nnoremap <leader>o :silent ! nohup xdg-open http://rseek.org/?q=%:p:h&<CR>
+" rseek under cursor
+nnoremap <leader>r :silent call XDGopen("http://rseek.org/?q=" . expand("<cword>"))<CR>
+" and for imdb tt id
+nnoremap <leader>t :silent call XDGopen("http://www.imdb.com/title/tt" . expand("<cword>"))<CR>
+
+" cf. http://vi.stackexchange.com/a/4355/4686
+function! GetVisualSelection()
+		" save the content of register v (it could be any alphabetic register)
+		let old_reg = getreg("v")
+
+		" reselect the visual selection and yank it in register v
+		normal! gv"vy
+
+		" get the content of register v (what we just yanked)
+		let raw_search = getreg("v")
+
+		" restore register v
+		call setreg("v", old_reg)
+
+		" return a sanitize version of the yanked text
+		" useful if the text contains "special" characters or is multiline
+		return substitute(escape(raw_search, '\/.*$^~[]'), "\n", '\\n', "g")
+endfunction
+
+" cf also http://vim.wikia.com/wiki/Search_the_web_for_text_selected_in_Vim
+vmap <leader>i <Esc>:silent call XDGopen("http://www.imdb.com/find?s=all&q=" . GetVisualSelection())<CR>
 
 " modelines
 " vim:ts=2:sw=2:fdm=marker:cms=\"%s:syn=vim:ft=vim:ai:cin:nu:fo=croql:cino=p0t0c5(0:
