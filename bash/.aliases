@@ -3,7 +3,7 @@
 #
 # Steven E. Pav
 
-export GREP_OPTIONS='--color=always'
+export GREP_OPTIONS='--color=auto'
 
 # find by extension and print. very useful.
 # fex R finds all R files.
