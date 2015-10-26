@@ -558,6 +558,7 @@ endfunction
 
 " cf also http://vim.wikia.com/wiki/Search_the_web_for_text_selected_in_Vim
 vmap <leader>i <Esc>:silent call XDGopen("http://www.imdb.com/find?s=all&q=" . GetVisualSelection())<CR>
+vmap ?g <Esc>:silent call XDGopen("http://www.google.com/search?q=" . GetVisualSelection())<CR>
 
 " modelines
 " vim:ts=2:sw=2:fdm=marker:cms=\"%s:syn=vim:ft=vim:ai:cin:nu:fo=croql:cino=p0t0c5(0:
