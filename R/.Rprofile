@@ -33,6 +33,8 @@ local({
 		drat:::addRepo("eddelbuettel")
 		drat:::addRepo('shabbychef')
 		drat:::addRepo('ghrr')
+		# local
+		drat:::addRepo('localRepo','file:///srv/rsync/shares/lran')
 	}
 })
 
