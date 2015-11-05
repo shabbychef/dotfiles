@@ -136,7 +136,7 @@ if (require(utils) && require(Quandl)) {
 	quandl.auth <- Sys.getenv('QUANDL_AUTH')
 	options(quandl.auth = ifelse(nchar(quandl.auth),quandl.auth,""))
 	rm(quandl.auth)
-	Quandl.auth(options()$quandl.auth)
+	Quandl.api_key(options()$quandl.auth)
 }
 
 # called on finish
