@@ -15,7 +15,14 @@ alias lsh='ls -alhS'
 
 # R install on the command line. slick.
 rinstall() {
-	sudo r /usr/share/doc/littler/examples/install2.r -r http://CRAN.rstudio.com/ \
+	if [ -f '/usr/share/doc/littler/examples/install2.r' ]; then
+		INSTALLR=/usr/share/doc/littler/examples/install2.r
+	fi
+	if [ -f '/usr/lib/R/site-library/littler/examples/install2.r' ]; then
+		INSTALLR=/usr/lib/R/site-library/littler/examples/install2.r
+	fi
+
+	sudo r $INSTALLR -r http://CRAN.rstudio.com/ \
 		-r http://shabbychef.github.io/drat/ \
 		-r http://eddelbuettel.github.io/drat \
 		-r http://ghrr.github.io/drat $@
