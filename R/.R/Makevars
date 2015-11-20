@@ -1,0 +1,8 @@
+# 
+# * Thu Nov 19 2015 04:15:47 PM Steven E. Pav shabbychef@gmail.com
+#
+# c.f. https://github.com/Rdatatable/data.table/wiki/Benchmarks-%3A-Grouping#what-about-compiler-flags
+
+CFLAGS=-O3 -mtune=native
+CXXFLAGS=-O3 -mtune=native
+
