@@ -15,7 +15,12 @@ alias lsh='ls -alhS'
 
 # R install on the command line. slick.
 rinstall() {
-	INSTALLR=/usr/share/doc/littler/examples/install2.r
+	INSTALLR=${HOME}/bin/install3.r
+	TAILARGS='-- --with-keep.source'
+	if [ ! -f "$INSTALLR" ]; then
+		TAILARGS=''
+		INSTALLR=/usr/share/doc/littler/examples/install2.r
+	fi
 	if [ ! -f "$INSTALLR" ]; then
 		INSTALLR=/usr/lib/R/site-library/littler/examples/install2.r
 	fi
@@ -34,7 +39,8 @@ rinstall() {
 		-r http://shabbychef.github.io/drat/ \
 		-r http://eddelbuettel.github.io/drat \
 		-r http://ghrr.github.io/drat \
-		-r file:///srv/rsync/shares/lran $@ 
+		-r file:///srv/rsync/shares/lran \
+		$TAILARGS $@ 
 }
 
 alias dc='docker-compose'
