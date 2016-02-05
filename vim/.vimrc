@@ -487,7 +487,6 @@ let g:loaded_minibufexplorer = 1
 " 2FIX: deprecate ConqueFoo in favor of FooConque as is better
 " for tab complete
 	command! -complete=shellcmd MatlabConque call s:ExecuteInConqueTerm('screen -D -R -S matlab');
-	command! -complete=shellcmd CraplabConque call s:ExecuteInConqueTerm('screen -D -R -S craplab');
 	"command! -complete=shellcmd Matlabit call conque_term#open("screen -D -R -S matlab", ['split'])
 	
 	command! -complete=shellcmd BashConque call s:ExecuteInConqueTerm('screen -D -R -S ashell')
@@ -497,6 +496,7 @@ let g:loaded_minibufexplorer = 1
 
 	command! -complete=shellcmd BPythonConque call s:ExecuteInConqueTerm('bpython');
 	command! -complete=shellcmd RConque call s:ExecuteInConqueTerm('screen -D -R -S r')
+	command! -complete=shellcmd SQLConque call s:ExecuteInConqueTerm('screen -D -R -S sql')
 	command! -complete=shellcmd JuliaConque call s:ExecuteInConqueTerm('screen -D -R -S julia')
 
 	command! -complete=shellcmd -nargs=1 ScreenConque call s:ExecuteInConqueTerm('screen -D -R -S ' . <f-args>)

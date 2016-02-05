@@ -12,6 +12,7 @@ fex() {
 }
 
 alias lsh='ls -alhS'
+alias lst='ls -alht'
 
 # R install on the command line. slick.
 rinstall() {
