@@ -11,8 +11,9 @@ fex() {
   find . -name '*.'$1 -type f -print
 }
 
-alias lsh='ls -alhS'
-alias lst='ls -alht'
+alias lsh='ls -AlhS'
+alias lst='ls -Alht'
+alias lsth='ls -Alht | head -n 8'
 
 # R install on the command line. slick.
 rinstall() {
