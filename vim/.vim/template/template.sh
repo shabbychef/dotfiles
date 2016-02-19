@@ -33,6 +33,7 @@ shift $((OPTIND-1))
 
 # c.f. http://kvz.io/blog/2013/11/21/bash-best-practices/
 # and  http://fahdshariff.blogspot.com/2013/10/shell-scripting-best-practices.html
+# and  http://redsymbol.net/articles/bash-exit-traps/
 
 declare -r -i port_num=8080
 
@@ -44,6 +45,18 @@ processit() {
 main() {
 
 }
+
+function finish() {
+	echo doing cleanup here
+
+
+}
+
+
+trap finish EXIT
+
+
+
 
 #for vim modeline: (do not edit)
 # vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=sh:ft=sh:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
