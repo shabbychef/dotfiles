@@ -33,6 +33,7 @@
 export EDITOR=vim
 export EMAIL=shabbychef@gmail.com
 export FULL_NAME='Steven E. Pav'
+export SRV=/srv
 
 export R_QUANDL_AUTH=ASDFASDFSADFSDFSADFASDFASDFASDF
 
