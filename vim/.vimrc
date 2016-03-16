@@ -23,6 +23,8 @@
 " see
 " http://stackoverflow.com/questions/10389205/show-current-leader-key-setting
 " http://stevelosh.com/blog/2010/09/coming-home-to-vim/#using-the-leader
+" I think you can deal with conque via 
+" sudo vim-addon -w install conqueterm?
 let mapleader = ","
 set runtimepath=~/.vim,/usr/share/vim-conque,$VIMRUNTIME,~/.vim/after
 
