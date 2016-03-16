@@ -13,7 +13,13 @@ fex() {
 
 alias lsh='ls -AlhS'
 alias lst='ls -Alht'
-alias lsth='ls -Alht | head -n 8'
+
+lsth() {
+	ls -Alht $@ | head -n 8
+}
+lshh() {
+	ls -AlhS $@ | head -n 8
+}
 
 # R install on the command line. slick.
 rinstall() {
