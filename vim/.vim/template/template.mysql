@@ -18,28 +18,27 @@
 # Comments: MY_FULL_NAME
 
 CREATE TABLE `Fun` (
-	`id` int(11) unsigned NOT NULL auto_increment,
-	`name` varchar(100) NOT NULL,
-	PRIMARY KEY (`id`),
-	UNIQUE KEY `uni_name` (`name`)
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uni_name` (`name`)
 ) ENGINE=InnoDB;
 CREATE INDEX fun_index ON Fun(name)
 
 DROP TABLE IF EXISTS MAJOR_aka_title CASCADE;
 CREATE TABLE `MAJOR_aka_name` (
-	`id` INTEGER UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	`name_id` INTEGER UNSIGNED NOT NULL,
-	`name` VARCHAR(766) NOT NULL,
-	`name_index` VARCHAR(12),
-	`alternate_name` VARCHAR(766) NOT NULL,
-	`birth_year` INT(4) UNSIGNED,
-	`phonetic_code` VARCHAR(5),
-	`note` TEXT,
-	`md5sum` VARCHAR(32),
-	INDEX `MAJOR_aka_title_idx_name_id` (`name_id`),
-	CHECK(birth_year >= 1870 AND birth_year <= 2050)
+  `id` INTEGER UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `name_id` INTEGER UNSIGNED NOT NULL,
+  `name` VARCHAR(766) NOT NULL,
+  `name_index` VARCHAR(12),
+  `alternate_name` VARCHAR(766) NOT NULL,
+  `birth_year` INT(4) UNSIGNED,
+  `phonetic_code` VARCHAR(5),
+  `note` TEXT,
+  `md5sum` VARCHAR(32),
+  INDEX `MAJOR_aka_title_idx_name_id` (`name_id`),
+  CHECK(birth_year >= 1870 AND birth_year <= 2050)
 ) ENGINE=MyISAM;
 
-
 #for vim modeline: (do not edit)
-# vim:ts=2:sw=2:tw=79:fdm=indent:cms=#%s:syn=mysql:ft=mysql:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
+# vim:ts=2:sw=2:tw=129:expandtab:fdm=indent:cms=#%s:syn=mysql:ft=mysql:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:

@@ -26,4 +26,4 @@ CREATE TABLE `Fun` (
 CREATE INDEX fun_index ON Fun(name)
 
 --for vim modeline: (do not edit)
--- vim:ts=2:sw=2:tw=79:fdm=indent:cms=--%s:syn=mysql:ft=mysql:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
+-- vim:ts=2:sw=2:tw=129:expandtab:fdm=indent:cms=--%s:syn=mysql:ft=mysql:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
