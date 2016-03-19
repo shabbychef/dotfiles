@@ -17,6 +17,7 @@ alias lst='ls -Alht'
 lsth() {
 	ls -Alht $@ | head -n 8
 }
+
 lshh() {
 	ls -AlhS $@ | head -n 8
 }
