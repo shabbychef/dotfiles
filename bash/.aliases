@@ -55,5 +55,6 @@ rinstall() {
 alias dc='docker-compose'
 alias dcr='docker-compose run'
 alias dcrr='docker-compose run --rm'
+alias dockviz='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock nate/dockviz'
 
 # vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=sh:ft=sh:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
