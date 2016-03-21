@@ -1,0 +1,64 @@
+:% s/MY_FULL_NAME/\=g:my_name/ge
+:% s/MY_EMAIL/\=g:my_email/ge
+:% s/DATE/\=strftime('%Y.%m.%d')/ge
+:% s/YEAR/\=strftime('%Y')/ge
+:% s/EMAILATAT/\=substitute($EMAIL,"@","@@","")/ge
+:% s/EMAIL/\=$EMAIL/ge
+:% s/THEFILENAME/\=expand("%:t")/g
+:% s/THEFUNCNAME/\=expand("%:t:r")/g
+:% s/CLASS/\=expand("%:p:h:t:r")/g
+:if search('<+CURSOR+>')
+:  normal! "_da>
+:endif
+:finish
+#
+# This is a cron file for THEFILENAME
+#
+#
+# Created: DATE
+# Copyright: MY_FULL_NAME, YEAR
+# Author: MY_FULL_NAME <EMAIL>
+# Comments: MY_FULL_NAME
+
+# format for files in /etc/cron.d/ which include a username:
+#
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * username      command to be executed
+
+# example:
+  0 */2 *  *  * root          /usr/sbin/example
+
+# format for crontab files, which do not include a username:
+#
+PATH=/usr/bin:/bin:/usr/local/bin
+
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  *          command to be executed
+# testing env
+ */3 *  *  *  *          env > /tmp/env.log
+
+# things like @hourly and so on also work:
+
+@hourly date >> /var/tmp/cron_hourly.log
+@daily date >> /var/tmp/cron_daily.log
+@weekly date >> /var/tmp/cron_weekly.log
+@monthly date >> /var/tmp/cron_monthly.log
+
+# unison for box
+@hourly bash /home/spav/bin/unison_wrapper.sh >> /dev/null
+
+# wheee. 
+@daily make -C /home/spav/work/bitbucket/code/modb backup
+
+#for vim modeline: (do not edit)
+# vim:ts=2:sw=2:tw=129:expandtab:fdm=indent:cms=#%s:syn=mysql:ft=mysql:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
