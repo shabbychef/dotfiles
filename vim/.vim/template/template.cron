@@ -14,14 +14,17 @@
 #
 # This is a cron file for THEFILENAME
 #
+# for crontab hints, see
+# http://krisjordan.com/essays/timesaving-crontab-tips
 #
 # Created: DATE
 # Copyright: MY_FULL_NAME, YEAR
 # Author: MY_FULL_NAME <EMAIL>
 # Comments: MY_FULL_NAME
 
-SHELL=/bin/bash
-PATH=/usr/bin:/bin:/usr/local/bin
+SHELL="/bin/bash"
+PATH="/usr/bin:/sbin:/bin:/usr/local/bin"
+HOME="/path/to/app/root"
 
 # format for files in /etc/cron.d/ which include a username:
 #
