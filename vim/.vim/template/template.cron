@@ -20,6 +20,9 @@
 # Author: MY_FULL_NAME <EMAIL>
 # Comments: MY_FULL_NAME
 
+SHELL=/bin/bash
+PATH=/usr/bin:/bin:/usr/local/bin
+
 # format for files in /etc/cron.d/ which include a username:
 #
 # .---------------- minute (0 - 59)
@@ -35,8 +38,6 @@
 
 # format for crontab files, which do not include a username:
 #
-PATH=/usr/bin:/bin:/usr/local/bin
-
 # .---------------- minute (0 - 59)
 # |  .------------- hour (0 - 23)
 # |  |  .---------- day of month (1 - 31)
@@ -61,4 +62,4 @@ PATH=/usr/bin:/bin:/usr/local/bin
 @daily make -C /home/spav/work/bitbucket/code/modb backup
 
 #for vim modeline: (do not edit)
-# vim:ts=2:sw=2:tw=129:expandtab:fdm=indent:cms=#%s:syn=mysql:ft=mysql:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
+# vim:ts=6:sw=6:tw=159:fdm=indent:cms=#%s:syn=mysql:ft=mysql:et:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
