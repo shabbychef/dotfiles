@@ -22,13 +22,13 @@
   Comments: MY_FULL_NAME
 */
 
-#ifndef __DEF_THECAPFUNCNAME
-#define __DEF_THECAPFUNCNAME
+#ifndef __DEF_THECAPFUNCNAME__
+#define __DEF_THECAPFUNCNAME__
 
 #include <math.h>
 #include <string.h>
 
-#endif /* __DEF_THECAPFUNCNAME_ */
+#endif /* __DEF_THECAPFUNCNAME__ */
 
 <+CURSOR+>
 
