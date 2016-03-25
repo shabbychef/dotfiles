@@ -33,4 +33,4 @@
 <+CURSOR+>
 
 //for vim modeline: (do not edit)
-// vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=//%s:tags=.c_tags;:syn=c:ft=c:mps+=<\:>:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
+// vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=//%s:tags=.c_tags;:syn=cpp:ft=cpp:mps+=<\:>:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:

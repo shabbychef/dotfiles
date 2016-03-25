@@ -1,5 +1,5 @@
-:% s/DATE/\=strftime('%Y.%m.%d')/ge
-:% s/YEAR/\=strftime('%Y')/ge
+:silent! % s/DATE/\=strftime('%Y.%m.%d')/ge
+:silent! % s/YEAR/\=strftime('%Y')/ge
 :if search('<+CURSOR+>')
 :  normal! "_da>
 :endif

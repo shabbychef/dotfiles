@@ -1,12 +1,12 @@
-:% s/MY_FULL_NAME/\=g:my_name/ge
-:% s/MY_EMAIL/\=g:my_email/ge
-:% s/DATE/\=strftime('%Y.%m.%d')/ge
-:% s/YEAR/\=strftime('%Y')/ge
-:% s/EMAILATAT/\=substitute($EMAIL,"@","@@","")/ge
-:% s/EMAIL/\=$EMAIL/ge
-:% s/THEFILENAME/\=expand("%:t")/g
-:% s/THEFUNCNAME/\=expand("%:t:r")/g
-:% s/CLASS/\=expand("%:p:h:t:r")/g
+:silent! % s/MY_FULL_NAME/\=g:my_name/ge
+:silent! % s/MY_EMAIL/\=g:my_email/ge
+:silent! % s/DATE/\=strftime('%Y.%m.%d')/ge
+:silent! % s/YEAR/\=strftime('%Y')/ge
+:silent! % s/EMAILATAT/\=substitute($EMAIL,"@","@@","")/ge
+:silent! % s/EMAIL/\=$EMAIL/ge
+:silent! % s/THEFILENAME/\=expand("%:t")/g
+:silent! % s/THEFUNCNAME/\=expand("%:t:r")/g
+:silent! % s/CLASS/\=expand("%:p:h:t:r")/g
 :if search('<+CURSOR+>')
 :  normal! "_da>
 :endif

@@ -1,7 +1,7 @@
-:% s/MY_FULL_NAME/\=g:my_name/ge
-:% s/MY_EMAIL/\=g:my_email/ge
-:% s/DATE/\=strftime('%Y.%m.%d')/ge
-:% s/YEAR/\=strftime('%Y')/ge
+:silent! % s/MY_FULL_NAME/\=g:my_name/ge
+:silent! % s/MY_EMAIL/\=g:my_email/ge
+:silent! % s/DATE/\=strftime('%Y.%m.%d')/ge
+:silent! % s/YEAR/\=strftime('%Y')/ge
 :if search('<+CURSOR+>')
 :  normal! "_da>
 :endif
