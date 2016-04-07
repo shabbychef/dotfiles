@@ -88,6 +88,9 @@ Bundle 'altercation/vim-colors-solarized'
 " meh
 "Bundle 'number-marks'
 
+" cpp highlighting?
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
 filetype plugin indent on     " required!
 
 " now call 
