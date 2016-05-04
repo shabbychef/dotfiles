@@ -19,13 +19,33 @@
 # Author: MY_FULL_NAME <EMAIL>
 # Comments: MY_FULL_NAME
 
-CREATE TABLE `Fun` (
-  `id` int(11) unsigned NOT NULL auto_increment,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uni_name` (`name`)
-) ENGINE=InnoDB;
-CREATE INDEX fun_index ON Fun(name)
+START TRANSACTION;
+
+USE DATABASE;
+
+DROP TABLE IF EXISTS `county`;
+CREATE TABLE `county` (
+  `county_id` int(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `fips` INT(4) unsigned NOT NULL,
+  `stcode` INT(2) unsigned NOT NULL,
+  `stabbr` VARCHAR(2) NOT NULL,
+  `stname` VARCHAR(63) NOT NULL,
+  `cntycode` INT(4) unsigned NOT NULL,
+  `name` VARCHAR(127) NOT NULL,
+  `area_sqm` DECIMAL(12,6) DEFAULT NULL,
+  `population` INT(7) UNSIGNED DEFAULT NULL,
+  `latitude` DECIMAL(8,6) DEFAULT NULL,
+  `longitude` DECIMAL(9,6) DEFAULT NULL,
+  UNIQUE `unicounty_all` (`fips`,`stcode`,`cntycode`),
+  INDEX `county_fips` (`fips`),
+  INDEX `county_stname` (`stname`),
+  INDEX `county_name` (`name`),
+  INDEX `county_area` (`area_sqm`),
+  INDEX `county_population` (`population`),
+  INDEX `county_lat` (`latitude`),
+  INDEX `county_lon` (`longitude`)
+) ENGINE=MyISAM;
+CREATE INDEX foo_index ON county(`name`);
 
 DROP TABLE IF EXISTS MAJOR_aka_title CASCADE;
 CREATE TABLE `MAJOR_aka_name` (
@@ -42,5 +62,47 @@ CREATE TABLE `MAJOR_aka_name` (
   CHECK(birth_year >= 1870 AND birth_year <= 2050)
 ) ENGINE=MyISAM;
 
+
+DROP TEMPORARY TABLE IF EXISTS `tempprice`;
+CREATE TEMPORARY TABLE `tempprice` (
+  `id` int(11) unsigned NOT NULL auto_increment PRIMARY KEY,
+  `ticker` VARCHAR(15) NOT NULL,
+  `symbol_id` int(11) unsigned DEFAULT NULL,
+  `bid` DECIMAL(10,4) unsigned DEFAULT NULL,
+  `ask` DECIMAL(10,4) unsigned DEFAULT NULL,
+  `last` DECIMAL(10,4) unsigned DEFAULT NULL,
+  `bid_size` int(10) unsigned DEFAULT NULL,
+  `ask_size` int(10) unsigned DEFAULT NULL,
+  `print_tstamp` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `tstamp` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  INDEX `tprice_ticker` (`ticker`),
+  INDEX `tprice_symbol_id` (`symbol_id`)
+) ENGINE=MyISAM;
+)
+LOAD DATA LOCAL INFILE 'FILENAME'
+IGNORE INTO TABLE `tempprice`
+CHARACTER SET 'latin1'
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(ticker,@volume,ask_size,ask,bid_size,bid,last,@matched,@routed);
+
+COMMIT;
+
+## example queries
+SELECT COLS 
+FROM TABLE
+WHERE CONDITION;
+
+UPDATE TABLE
+SET COL1=VAL1,COL2=VAL2
+WHERE INHERENT_CONDITION;
+
+SELECT GRIDX,MIN(foo),MAX(FOO) FROM
+TABLE WHERE CONDITION
+GROUP BY GRIDX
+LIMIT 5;
+
+
 #for vim modeline: (do not edit)
-# vim:ts=2:sw=2:tw=129:expandtab:fdm=indent:cms=#%s:syn=mysql:ft=mysql:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
+# vim:ts=2:sw=2:tw=129:et:fdm=indent:cms=#%s:syn=mysql:ft=mysql:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
