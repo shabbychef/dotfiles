@@ -144,7 +144,7 @@ if (require(utils) && require(Quandl)) {
 # called on finish
 .Last <- function(){ 
 	if (interactive()) {
-		cat("\nGoodbye at ", date(), "\n")
+		tryCatch({ cat("\nGoodbye at ", date(), "\n") },error=function(e) { NULL })
 	}
 }
 
