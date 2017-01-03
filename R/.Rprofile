@@ -35,6 +35,7 @@ local({
 		drat:::addRepo('ghrr')
 		# local
 		drat:::addRepo('localRepo','file:///srv/rsync/shares/lran')
+		drat:::addRepo('localRepo','file:///home/spav/github/drat')
 	}
 })
 

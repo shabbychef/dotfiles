@@ -15,6 +15,7 @@ stow less
 stow tmux
 stow screen
 stow hg
+stow abcde
 cd ~/.vim && make all && cd -
 ```
 
