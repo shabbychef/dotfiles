@@ -65,6 +65,8 @@ Bundle 'thinca/vim-template'
 Bundle "nathanaelkane/vim-indent-guides"
 " * Wed Mar 05 2014 09:28:59 AM Steven E. Pav <steven@cerebellumcapital.com>
 Bundle "ekalinin/Dockerfile.vim"
+" * Mon Apr 17 2017 09:46:59 PM Steven E. Pav steven@gilgamath.com
+Bundle "jamessan/vim-gnupg"
 
 " fuck this. don't work unless ubuntu install it. bleah.
 "Bundle 'Conque-Shell'

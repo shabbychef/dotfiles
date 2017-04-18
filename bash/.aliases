@@ -3,7 +3,8 @@
 #
 # Steven E. Pav
 
-export GREP_OPTIONS='--color=auto'
+# complains now....
+#export GREP_OPTIONS='--color=auto'
 
 # find by extension and print. very useful.
 # fex R finds all R files.
@@ -21,6 +22,8 @@ lsth() {
 lshh() {
 	ls -AlhS $@ | head -n 8
 }
+
+alias ripit='abcde -c ~/.abcde.conf'
 
 # R install on the command line. slick.
 rinstall() {
@@ -56,5 +59,8 @@ alias dc='docker-compose'
 alias dcr='docker-compose run'
 alias dcrr='docker-compose run --rm'
 alias dockviz='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock nate/dockviz'
+
+alias amazon='nohup google-chrome-beta www.amazon.com'
+alias netflix='nohup google-chrome-stable www.netflix.com'
 
 # vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=sh:ft=sh:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
