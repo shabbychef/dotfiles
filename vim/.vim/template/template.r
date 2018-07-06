@@ -7,11 +7,30 @@
 :silent! % s/THEFILENAME/\=expand("%:t")/g
 :silent! % s/THEFUNCNAME/\=expand("%:t:r")/g
 :silent! % s/CLASS/\=expand("%:p:h:t:r")/g
+:silent! % s/{PKG}/\=expand("%:p:h:h:t:r")/g
 :if search('<+CURSOR+>')
 :  normal! "_da>
 :endif
 :finish
 # /usr/bin/r
+#
+# Copyright YEAR-YEAR MY_FULL_NAME. All Rights Reserved.
+# Author: MY_FULL_NAME 
+#
+# This file is part of {PKG}.
+#
+# {PKG} is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# {PKG} is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with cocktailApp.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Created: DATE
 # Copyright: MY_FULL_NAME, YEAR
@@ -58,7 +77,7 @@
 #' This is a thin wrapper on the t distribution. 
 #' @template etc
 #' @template sr
-#' @template CLASS
+#' @template {PKG}
 #' @references
 #'
 #' Johnson, N. L., and Welch, B. L. "Applications of the non-central t-distribution."

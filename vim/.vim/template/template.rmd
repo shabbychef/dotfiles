@@ -6,11 +6,25 @@
 :finish
 Title: 
 Date: THETIME
-Tags: statistics, shame
+Tags: statistics, quant-finance, analysis, R, shame
 Slug: THEFILESTUB
 Summary: whatsat?
 Author: Steven
+main_figure: THEFILESTUB_plot_1.png
+main_figure_alt: some description of the main plot.
+
+```{r "setup",eval=TRUE,echo=FALSE,cache=TRUE,warning=FALSE,cache.path='cache/THEFILESTUB_'}
+opts_chunk$set(comment=NA, message=FALSE, cache=TRUE, fig.width=5, fig.height=3, out.width='700px', out.height='400px')
+opts_chunk$set(cache.path='cache/THEFILESTUB_',fig.path='figure/THEFILESTUB_')
+options(digits=6)
+```
 
 <+CURSOR+>
+
+summary ... 
+[Link text](http://link.url)
+
+<!-- PELICAN_END_SUMMARY -->
+
 
 [//]: # ( vim:ts=2:sw=2:tw=79:fdm=indent:syn=r:ft=markdown:ai:si:cin:nu:fo=croql:cino=p0t0c5(0: )
