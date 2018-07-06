@@ -54,7 +54,8 @@ Bundle 'vcscommand.vim'
 Bundle 'svncommand.vim'
 Bundle 'taglist.vim'
 
-Bundle 'vim-orgmode'
+"Bundle 'vim-orgmode'
+Bundle 'jceb/vim-orgmode'
 Bundle 'utl.vim'
 
 Bundle 'thinca/vim-template'
@@ -74,6 +75,7 @@ Bundle "jamessan/vim-gnupg"
 " see also http://mirnazim.org/writings/vim-plugins-i-use/
 " trying these out:
 "Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
 Bundle 'Gist.vim'
 "Bundle 'ack.vim'
 "Bundle 'FuzzyFinder'
