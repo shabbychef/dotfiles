@@ -54,7 +54,11 @@ case $TERM in
 		;;
 esac
 
-export PS1='< \[\033[01;32m\]\u@\h \[\033[01;34m\]\!:\# \t \W \[\033[00m\]> ';
+# https://coderwall.com/p/fasnya/add-git-branch-name-to-bash-prompt
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="< \[\033[01;32m\]\u@\h \[\033[01;34m\]\!:\# \t \W\e[33m\$(parse_git_branch) \[\033[00m\]> ";
 
 SHELL=`which bash`;
 THISRC=$HOME/.bashrc;
