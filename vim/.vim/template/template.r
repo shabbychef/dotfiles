@@ -30,7 +30,7 @@
 # GNU Lesser General Public License for more details.
 #
 # You should have received a copy of the GNU Lesser General Public License
-# along with cocktailApp.  If not, see <http://www.gnu.org/licenses/>.
+# along with {PKG}.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Created: DATE
 # Copyright: MY_FULL_NAME, YEAR
