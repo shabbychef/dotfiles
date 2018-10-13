@@ -102,6 +102,12 @@ syn match rFloat "\<\.\d\+\([Ee][-+]\=\d\+\)\="
 " floating point number with no fractional part and optional exponent
 syn match rFloat "\<\d\+[Ee][-+]\=\d\+"
 
+
+" dplyr
+syn keyword rDplyr mutate select filter rename arrange summarize group_by ungroup data_frame
+syn keyword rDplyr left_join right_join join anti_join
+
+
 " complex number
 syn match rComplex "\<\d\+i"
 syn match rComplex "\<\d\++\d\+i"
@@ -132,6 +138,7 @@ syn match rOpError  '>>'
 
 syn match rAssign "<\{1,2}-"
 syn match rAssign "->\{1,2}"
+syn match rPipe '%>%'
 
 " Special
 syn match rDelimiter "[,;:]"
@@ -151,6 +158,8 @@ syn match rError      "[)\]}]"
 syn match rBraceError "[)}]" contained
 syn match rCurlyError "[)\]]" contained
 syn match rParenError "[\]}]" contained
+
+
 
 " Source list of R functions produced by a filetype plugin (if installed)
 if has("nvim")
@@ -230,7 +239,28 @@ hi def link rString      String
 hi def link rStrError    Error
 hi def link rType        Type
 hi def link rOKeyword    Title
+hi def link rDplyr       Dplyr
+hi def link rPipe        Pipe
 
 let b:current_syntax="r"
+
+
+syntax keyword rNumber Sigma conceal cchar=Σ
+syntax keyword rNumber sigma conceal cchar=σ
+syntax keyword rNumber alpha conceal cchar=α
+syntax keyword rNumber beta conceal cchar=β
+syntax keyword rNumber pi conceal cchar=π
+syntax keyword rNumber Pi conceal cchar=Π
+syntax keyword rNumber zeta conceal cchar=ζ
+syntax keyword rNumber nu conceal cchar=ν
+syntax keyword rNumber epsilon conceal cchar=ε
+syntax keyword rNumber mu conceal cchar=μ
+syntax keyword rNumber tau conceal cchar=τ
+syntax keyword rNumber eta conceal cchar=η
+syntax keyword rNumber Theta conceal cchar=Θ
+syntax keyword rNumber theta conceal cchar=θ
+
+setlocal conceallevel=2
+setlocal concealcursor=ni
 
 " vim: ts=8 sw=2

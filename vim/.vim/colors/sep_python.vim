@@ -73,7 +73,7 @@ highlight Comment       gui=None guifg=#507080
 highlight Constant      guifg=cyan3 guibg=bg
 highlight String        gui=None guifg=turquoise2 guibg=bg
 highlight Number        gui=None guifg=Cyan guibg=bg
-highlight Boolean       gui=bold guifg=Cyan guibg=bg
+highlight Boolean       gui=bold guifg=Cyan guibg=bg ctermfg=DarkRed
 highlight Identifier    guifg=LightSkyBlue3
 highlight Function      gui=None guifg=DarkSeaGreen3 guibg=bg
 
@@ -136,5 +136,7 @@ highlight Macro         ctermfg=DarkRed
 highlight Identifier    ctermfg=DarkYellow
 highlight Structure     ctermfg=DarkGreen
 highlight String        ctermfg=DarkCyan
+highlight Dplyr         ctermfg=DarkGreen
+highlight Pipe          ctermfg=DarkYellow
 
 " vim: sw=4 ts=4 et
