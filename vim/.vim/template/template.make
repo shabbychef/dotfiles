@@ -1,15 +1,17 @@
 :silent! % s/DATE/\=strftime('%Y.%m.%d')/ge
 :silent! % s/YEAR/\=strftime('%Y')/ge
+:silent! % s/CLASS/\=expand("%:p:h:t:r")/g
+:silent! % s/{PKG}/\=expand("%:p:h:h:t:r")/g
 :if search('<+CURSOR+>')
 :  normal! "_da>
 :endif
 :finish
 ######################
 # 
+# Project: {PKG}
 # Created: DATE
 # Copyright: Steven E. Pav, YEAR
 # Author: Steven E. Pav
-# SVN: $Id$
 ######################
 
 ############### FLAGS ###############
@@ -26,15 +28,27 @@ CWD          = $(shell pwd)
 
 ############## DEFAULT ##############
 
+.DEFAULT_GOAL 	:= help
+
 default : all
 
 ############## MARKERS ##############
 
-.PHONY   : 
+.PHONY   : help targets
 .SUFFIXES: .tex .bib .dvi .ps .pdf .eps
 .PRECIOUS: %.dvi %.ps %.pdf %.jpg %.gif 
 
 ############ BUILD RULES ############
+
+# this will have to change b/c of inclusion file names...
+help:  ## generate this help message
+	@grep -h -P '^(([^\s]+\s+)*([^\s]+))\s*:.*?##\s*.*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+# thanks to http://stackoverflow.com/a/26339924/164611
+targets:  ## print the targets of the makefile
+	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | \
+		awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | \
+		sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$' | xargs
 
 # compile and convert
 %.dvi : %.tex $(STY_FILES)
@@ -54,4 +68,4 @@ default : all
 	@-make --silent help
 
 #for vim modeline: (do not edit)
-# vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:tags=.tags;:syn=make:ft=make:ai:si:cin:nu:fo=croqt:cino=p0t0c5(0:
+# vim:ts=2:sw=2:tw=129:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:tags=.tags;:syn=make:ft=make:ai:si:cin:nu:fo=croqt:cino=p0t0c5(0:

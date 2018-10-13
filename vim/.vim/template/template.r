@@ -52,6 +52,10 @@
 #' \item I use \eqn{n}{n} to stand for blah.
 #' \item and so forth....
 #' }
+#' \describe{
+#' \item{a}{value.}
+#' \item{b}{factor.}
+#' }
 #'
 #' @usage
 #'
@@ -111,6 +115,13 @@ doc <- "Usage: THEFILENAME [-v] [-H <HOST>] [-p <PORT>] [-u <USER>] [-P <PASSWOR
 -h --help                        show this help text"
 
 opt <- docopt(doc)
+
+suppressMessages({
+	library(readr)
+	library(dplyr)
+	library(tidyr)
+	library(magrittr)
+})
 
 #for vim modeline: (do not edit)
 # vim:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=r:ft=r
