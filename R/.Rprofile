@@ -134,13 +134,13 @@ if (interactive()) {
 	}
 }
 
-# Quandl
-if (require(utils) && require(Quandl)) {
-	quandl.auth <- Sys.getenv('QUANDL_AUTH')
-	options(quandl.auth = ifelse(nchar(quandl.auth),quandl.auth,""))
-	rm(quandl.auth)
-	Quandl.api_key(options()$quandl.auth)
-}
+# do not load Quandl!
+#if (require(utils) && require(Quandl)) {
+	#quandl.auth <- Sys.getenv('QUANDL_AUTH')
+	#options(quandl.auth = ifelse(nchar(quandl.auth),quandl.auth,""))
+	#rm(quandl.auth)
+	#Quandl.api_key(options()$quandl.auth)
+#}
 
 # called on finish
 .Last <- function(){ 
