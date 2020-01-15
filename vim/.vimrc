@@ -215,7 +215,12 @@ let g:org_todo_keywords=['TODO','DONE','WONT']
   iab YDME <C-R>=strftime("* %a %b %d %Y ")<CR><C-R>=g:my_name<CR> <C-R>=g:my_email<CR> 
   "iab YDHMONLY <C-R>=strftime("%a %b %d %Y %X")<CR>
   iab YDHMONLY <C-R>=strftime("%a %b %d %Y %T")<CR>
+  iab yyyy <C-R>=strftime("%a %b %d %Y %T")<CR>
+
   iab YDHME <C-R>=strftime("* %a %b %d %Y %X ")<CR><C-R>=g:my_name<CR> <C-R>=g:my_email<CR>
+
+  iab SEPSEP ----------------<CR><C-R>=strftime("* %a %b %d %Y %X ")<CR><C-R>=g:my_name<CR> <C-R>=g:my_email<CR> 
+  iab llll ----------------<CR><C-R>=strftime("* %a %b %d %Y %X ")<CR><C-R>=g:my_name<CR> <C-R>=g:my_email<CR> 
 	" adding the chomp part. fingers crossed.
 	iab ZUU <C-R>=system('uuidgen \| perl -pe chomp')<CR>
 

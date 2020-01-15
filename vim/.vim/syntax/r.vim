@@ -38,7 +38,7 @@ syn match rOKeyword contained "@\(S3method\|TODO\|aliases\|alias\|assignee\|auth
 syn match rOKeyword contained "@\(callGraphPrimitives\|concept\|exportClass\|exportMethod\|exportPattern\|export\|formals\)"
 syn match rOKeyword contained "@\(format\|importClassesFrom\|importFrom\|importMethodsFrom\|import\|keywords\|useDynLib\)"
 syn match rOKeyword contained "@\(method\|noRd\|note\|references\|seealso\|setClass\|slot\|source\|title\|usage\)"
-syn match rOKeyword contained "@\(family\|template\|templateVar\|description\|details\|inheritParams\)"
+syn match rOKeyword contained "@\(family\|template\|templateVar\|description\|details\|section\|inheritParams\)"
 syn match rOComment contains=@Spell,rOKeyword "#'.*"
 
 
@@ -252,7 +252,13 @@ syntax keyword rNumber beta conceal cchar=β
 syntax keyword rNumber pi conceal cchar=π
 syntax keyword rNumber Pi conceal cchar=Π
 syntax keyword rNumber zeta conceal cchar=ζ
+syntax keyword rNumber lambda conceal cchar=λ
+syntax keyword rNumber Lambda conceal cchar=Λ
 syntax keyword rNumber nu conceal cchar=ν
+syntax keyword rNumber omega conceal cchar=ω
+syntax keyword rNumber Omega conceal cchar=Ω
+syntax keyword rNumber gamma conceal cchar=γ
+syntax keyword rNumber Gamma conceal cchar=Γ
 syntax keyword rNumber epsilon conceal cchar=ε
 syntax keyword rNumber mu conceal cchar=μ
 syntax keyword rNumber tau conceal cchar=τ
