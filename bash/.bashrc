@@ -58,7 +58,16 @@ esac
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
-export PS1="< \[\033[01;32m\]\u@\h \[\033[01;34m\]\!:\# \t \W\e[33m\$(parse_git_branch) \[\033[00m\]> ";
+parse_git_commit() {
+     git rev-parse --short HEAD 2> /dev/null 
+}
+parse_git_foo() {
+	local REVP=$(git rev-parse --short HEAD 2> /dev/null)
+	local GITB=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+	echo " ($GITB: $REVP)"
+}
+
+export PS1="< \[\033[01;32m\]\u@\h \[\033[01;34m\]\!:\# \t \W\e[33m\$(parse_git_foo) \[\033[00m\]> ";
 
 SHELL=`which bash`;
 THISRC=$HOME/.bashrc;
@@ -95,5 +104,14 @@ if [ $SHLVL -lt 1 ]; then
 	date;
 	df;
 fi;
+
+# uh, wat?
+export http_proxy=''
+export https_proxy=''
+export ftp_proxy=''
+export socks_proxy=''
+
+# added by travis gem
+[ -f /home/spav/.travis/travis.sh ] && source /home/spav/.travis/travis.sh
 
 # vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=sh:ft=sh:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
