@@ -260,7 +260,9 @@ syntax keyword rNumber eta conceal cchar=η
 syntax keyword rNumber Theta conceal cchar=Θ
 syntax keyword rNumber theta conceal cchar=θ
 
-setlocal conceallevel=2
-setlocal concealcursor=ni
+" fucking hell turn this shit off
+"setlocal conceallevel=2
+"setlocal concealcursor=ni
+setlocal conceallevel=0
 
 " vim: ts=8 sw=2
