@@ -28,15 +28,17 @@ local({r <- getOption("repos");
 
 #
 local({
-	if (require(drat)) {
-		options(dratRepo="/home/spav/github/drat")
-		drat:::addRepo("eddelbuettel")
-		drat:::addRepo('shabbychef')
-		drat:::addRepo('ghrr')
-		# local
-		drat:::addRepo('localRepo','file:///srv/rsync/shares/lran')
-		drat:::addRepo('localRepo','file:///home/spav/github/drat')
-	}
+	suppressMessages({
+		if (require(drat,quietly=TRUE)) {
+			options(dratRepo="/home/spav/github/drat")
+			drat:::addRepo("eddelbuettel")
+			drat:::addRepo('shabbychef')
+			drat:::addRepo('ghrr')
+			# local
+			drat:::addRepo('localRepo','file:///srv/rsync/shares/lran')
+			drat:::addRepo('localRepo','file:///home/spav/github/drat')
+		}
+	})
 })
 
 # identity
@@ -112,8 +114,6 @@ if (interactive()) {
 
 # called on startup
 .First <- function(){
-	#library(Hmisc)
-	#library(R2HTML)
 	if (interactive()) {
 		if (require(fortunes,quietly=TRUE)) fortunes::fortune() 
 		cat("\nWelcome at", date(), "\n") 
