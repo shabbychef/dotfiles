@@ -1,0 +1,16 @@
+:silent! % s/DATE/\=strftime('%Y.%m.%d')/ge
+:silent! % s/YEAR/\=strftime('%Y')/ge
+:if search('<+CURSOR+>')
+:  normal! "_da>
+:endif
+:finish
+;;;;;;;;;;;;;;;;;;;;;;
+; 
+; Created: DATE
+; Copyright: Steven E. Pav, YEAR
+; Author: Steven E. Pav
+; SVN: $Id$
+;;;;;;;;;;;;;;;;;;;;;;
+
+;for vim modeline: (do not edit)
+; vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=;%s:tags=.tags;:syn=logo:ft=logo:ai:si:cin:nu:fo=cro:cino=p0t0c5(0:
