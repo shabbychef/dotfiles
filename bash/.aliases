@@ -62,5 +62,20 @@ alias dockviz='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock nate
 
 alias amazon='nohup google-chrome-beta www.amazon.com'
 alias netflix='nohup google-chrome-stable www.netflix.com'
+alias unspace='rename "s/ /_/g"'
+
+alias hed='head -n $(( $(tput lines) - 2))'
+alias tal='tail -n $(( $(tput lines) - 2))'
+
+# cat, hed and tal last written file
+catl() {
+	cat $(ls -At | head -n 1)
+}
+hedl() {
+	hed $(ls -At | head -n 1)
+}
+tall() {
+	tal $(ls -At | head -n 1)
+}
 
 # vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=sh:ft=sh:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
