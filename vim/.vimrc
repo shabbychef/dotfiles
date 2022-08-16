@@ -71,6 +71,7 @@ Bundle "jamessan/vim-gnupg"
 
 " fuck this. don't work unless ubuntu install it. bleah.
 "Bundle 'Conque-Shell'
+Bundle 'lrvick/Conque-Shell'
 
 " see also http://mirnazim.org/writings/vim-plugins-i-use/
 " trying these out:
@@ -94,6 +95,12 @@ Bundle 'altercation/vim-colors-solarized'
 
 " cpp highlighting?
 Plugin 'octol/vim-cpp-enhanced-highlight'
+
+" ok, try vim-zettel.
+Plugin 'vimwiki/vimwiki'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+Plugin 'michal-h21/vim-zettel'
 
 filetype plugin indent on     " required!
 
@@ -281,6 +288,10 @@ imap <F1> <nop>
 map <F1> <nop>
 map <C-F1> <nop>
 
+" should this be in R.vim?
+" for R map kk to %>%
+imap kk %>%
+
 " Mapping of special keys - arrow keys and function keys.
 " ===================================================================
 " Buffer commands (split,move,delete) -
@@ -394,7 +405,8 @@ map <C-F1> <nop>
 
 " * Tue Apr 02 2013 10:12:14 AM Steven E. Pav <steven@cerebellumcapital.com>
 " turn these off and use ftplugin instead!
-filetype plugin on
+" filetype plugin on
+filetype off
 "}}}
 
 "for use in pine/alpine"{{{
@@ -500,20 +512,35 @@ let g:loaded_minibufexplorer = 1
 
 " 2FIX: deprecate ConqueFoo in favor of FooConque as is better
 " for tab complete
-	command! -complete=shellcmd MatlabConque call s:ExecuteInConqueTerm('screen -D -R -S matlab');
-	"command! -complete=shellcmd Matlabit call conque_term#open("screen -D -R -S matlab", ['split'])
-	
-	command! -complete=shellcmd BashConque call s:ExecuteInConqueTerm('screen -D -R -S ashell')
+	command! BashConque call s:ExecuteInConqueTerm('screen -D -R -S ashell')
 	
 	"command! -complete=shellcmd ConqueIPythonScreen call s:ExecuteInConqueTerm('screen -D -R -S ipython')
 	"command! -complete=shellcmd ConqueIPython call s:ExecuteInConqueTerm('ipython')
 
-	command! -complete=shellcmd BPythonConque call s:ExecuteInConqueTerm('bpython');
-	command! -complete=shellcmd RConque call s:ExecuteInConqueTerm('screen -D -R -S r')
-	command! -complete=shellcmd SQLConque call s:ExecuteInConqueTerm('screen -D -R -S sql')
-	command! -complete=shellcmd JuliaConque call s:ExecuteInConqueTerm('screen -D -R -S julia')
+	command! BPythonConque call s:ExecuteInConqueTerm('bpython');
+	command! RConque call s:ExecuteInConqueTerm('screen -D -R -S r')
+	"command! -complete=shellcmd SQLConque call s:ExecuteInConqueTerm('screen -D -R -S sql')
+	command! SnoConque call s:ExecuteInConqueTerm('screen -D -R -S snow')
+	command! PyConque call s:ExecuteInConqueTerm('screen -D -R -S python')
+	command! JuliaConque call s:ExecuteInConqueTerm('screen -D -R -S julia')
 
 	command! -complete=shellcmd -nargs=1 ScreenConque call s:ExecuteInConqueTerm('screen -D -R -S ' . <f-args>)
+
+	" there are problems in R CLI where if you push too much through conque, it
+	" garbles the text. so create some macros to do that.
+	" V grab 10 lines and then F9 to push, then move 11 lines down.
+	" not this.
+	" let @p='V10j#9<cr><ESC><C-W><C-W>11j'
+	" this did it.
+	" how I did this was whenever I wanted to type a 'weird' character, I first
+	" hit ctrl-v, and it did it for me. 
+	" https://stackoverflow.com/a/2943617/164611
+	" also see
+	" :help reg
+	" :reg u
+	" :help CTRL-V
+	let @u='V10j[20~11j'
+	let @p='V5j[20~6j'
 
 	"command! -complete=shellcmd -nargs=+ Conque call s:ExecuteInConqueTerm(<q-args>)
 
@@ -573,6 +600,13 @@ endfunction
 " cf also http://vim.wikia.com/wiki/Search_the_web_for_text_selected_in_Vim
 vmap <leader>i <Esc>:silent call XDGopen("http://www.imdb.com/find?s=all&q=" . GetVisualSelection())<CR>
 vmap ?g <Esc>:silent call XDGopen("http://www.google.com/search?q=" . GetVisualSelection())<CR>
+
+" Uncomment the following to have Vim jump to the last position when                                                       
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
 
 " modelines
 " vim:ts=2:sw=2:fdm=marker:cms=\"%s:syn=vim:ft=vim:ai:cin:nu:fo=croql:cino=p0t0c5(0:
