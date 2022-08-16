@@ -68,6 +68,10 @@ parse_git_foo() {
 }
 
 export PS1="< \[\033[01;32m\]\u@\h \[\033[01;34m\]\!:\# \t \W\e[33m\$(parse_git_foo) \[\033[00m\]> ";
+# FML
+# https://stackoverflow.com/q/16715103/164611
+#export PS1='< \e[01;31m$(code=${?##0};echo ${code:+[error: ${code}]" "})\e[00m'"\[\033[01;32m\]\u@\h \[\033[01;34m\]\!:\# \t \W\e[33m\$(parse_git_foo) \[\033[00m\]> ";
+
 
 SHELL=`which bash`;
 THISRC=$HOME/.bashrc;

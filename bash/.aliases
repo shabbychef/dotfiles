@@ -11,6 +11,11 @@
 fex() {
   find . -name '*.'$1 -type f -print
 }
+# find and grep
+gex() {
+	local -r ext="$1"; shift
+  find . -name '*.'$ext -type f -exec grep $@ {} \;
+}
 
 alias lsh='ls -AlhS'
 alias lst='ls -Alht'
@@ -18,6 +23,14 @@ alias lst='ls -Alht'
 lsth() {
 	ls -Alht $@ | head -n 8
 }
+lsthed() {
+	ls -Alht $@ | head -n $(( $(tput lines) - 2))
+}
+gsthed() {
+	git status | head -n $(( $(tput lines) - 2))
+}
+
+
 
 lshh() {
 	ls -AlhS $@ | head -n 8
@@ -67,6 +80,27 @@ alias unspace='rename "s/ /_/g"'
 alias hed='head -n $(( $(tput lines) - 2))'
 alias tal='tail -n $(( $(tput lines) - 2))'
 
+# cf https://stackoverflow.com/a/44849814/164611
+# modified slightly
+# want to 
+# export DOT_FREQ=1000000 or pipe 2 to /dev/null on this?
+headtail() {
+	stdbuf -i0 -o0 -e0 awk -v offset=${MAX_LINES:-10} -v everydot=${DOT_FREQ:-10000} \
+          '{
+               if (NR <= offset) print;
+               else {
+                   a[NR] = $0;
+                   delete a[NR-offset];
+									 if (NR % everydot == 0) { printf "." > "/dev/stderr" }
+							 }
+           }
+           END {
+             print "" > "/dev/stderr";
+             for(i=NR-offset+1 > offset ? NR-offset+1: offset+1 ;i<=NR;i++)
+             { print a[i]}
+           }'
+}
+
 # cat, hed and tal last written file
 catl() {
 	cat $(ls -At | head -n 1)
@@ -76,6 +110,18 @@ hedl() {
 }
 tall() {
 	tal $(ls -At | head -n 1)
+}
+granch() {
+	git checkout $(git branch | grep $@)
+}
+# vi the last written file. yolo!
+vil() {
+	vi $(ls -At | head -n 1)
+}
+docker_start() {
+	# FML, Y U NO Daemon?
+	# cf https://forums.docker.com/t/restart-docker-from-command-line/9420/6
+	open --background -a Docker
 }
 
 # vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=sh:ft=sh:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
