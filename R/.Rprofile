@@ -8,9 +8,6 @@
 # see also: http://www.statmethods.net/interface/customizing.html
 # see also: http://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html
 # see also: http://stackoverflow.com/questions/1189759/expert-r-users-whats-in-your-rprofile
-#
-# * Wed Dec 26 2012 03:03:24 PM Steven E. Pav <steven@cerebellumcapital.com>
-# $Id$
 
 options(editor="vim")
 
@@ -19,11 +16,14 @@ options(tab.width=2)
 options(digits=4)
 options(error=utils::recover)
 options(max.print=999)
+# for install via github, which can timeout
+# https://stackoverflow.com/a/35283374/164611
+options(timeout=300)
 
 # set a CRAN mirror
 			# r["CRAN"] <- "http://cran.cnr.berkeley.edu/"; "http://cran.stat.ucla.edu" ?
 local({r <- getOption("repos"); 
-			r["CRAN"] <- "http://cran.rstudio.com/";
+			r["CRAN"] <- "https://cran.rstudio.com/";
 			options(repos=r)})
 
 #
@@ -148,6 +148,21 @@ if (interactive()) {
 		tryCatch({ cat("\nGoodbye at ", date(), "\n") },error=function(e) { NULL })
 	}
 }
+
+# jfc https://rodneydyer.com/post/2021-02-09-dplyr-summarize-warnings/
+options(dplyr.summarise.inform = FALSE)
+
+# https://rstats-tips.net/2020/07/31/get-rid-of-info-of-dplyr-when-grouping-summarise-regrouping-output-by-species-override-with-groups-argument/
+options(tidyverse.quiet = TRUE)
+
+# the progress bar can sometimes block the reading of a csv. fuck that noise.
+options(readr.show_progress = FALSE)
+
+# consider this as well:
+options(readr.show_col_types=FALSE)
+
+# always want markdown, sorry
+options(knitr.table.format='markdown') 
 
 #for vim modeline: (do not edit)
 # vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=r:ft=r:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:
