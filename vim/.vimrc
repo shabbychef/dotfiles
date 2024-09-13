@@ -70,8 +70,9 @@ Bundle "ekalinin/Dockerfile.vim"
 Bundle "jamessan/vim-gnupg"
 
 " fuck this. don't work unless ubuntu install it. bleah.
-"Bundle 'Conque-Shell'
-Bundle 'lrvick/Conque-Shell'
+" Bundle 'Conque-Shell'
+" Bundle 'lrvick/Conque-Shell'
+Bundle 'goballooning/vim-conque'
 
 " see also http://mirnazim.org/writings/vim-plugins-i-use/
 " trying these out:
@@ -517,13 +518,11 @@ let g:loaded_minibufexplorer = 1
 	"command! -complete=shellcmd ConqueIPythonScreen call s:ExecuteInConqueTerm('screen -D -R -S ipython')
 	"command! -complete=shellcmd ConqueIPython call s:ExecuteInConqueTerm('ipython')
 
-	command! BPythonConque call s:ExecuteInConqueTerm('bpython');
-	command! RConque call s:ExecuteInConqueTerm('screen -D -R -S r')
-	"command! -complete=shellcmd SQLConque call s:ExecuteInConqueTerm('screen -D -R -S sql')
-	command! SnoConque call s:ExecuteInConqueTerm('screen -D -R -S snow')
-	command! PyConque call s:ExecuteInConqueTerm('screen -D -R -S python')
-	command! JuliaConque call s:ExecuteInConqueTerm('screen -D -R -S julia')
-
+	command! -complete=shellcmd BPythonConque call s:ExecuteInConqueTerm('bpython');
+	command! -complete=shellcmd RConque call s:ExecuteInConqueTerm('screen -D -R -S r')
+	command! -complete=shellcmd PyConque call s:ExecuteInConqueTerm('screen -D -R -S python')
+	command! -complete=shellcmd SQLConque call s:ExecuteInConqueTerm('screen -D -R -S sql')
+	"command! -complete=shellcmd JuliaConque call s:ExecuteInConqueTerm('screen -D -R -S julia')
 	command! -complete=shellcmd -nargs=1 ScreenConque call s:ExecuteInConqueTerm('screen -D -R -S ' . <f-args>)
 
 	" there are problems in R CLI where if you push too much through conque, it

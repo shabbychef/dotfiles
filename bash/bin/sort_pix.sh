@@ -14,6 +14,7 @@ OUTSH=fixus.sh
 
 echo "#! /bin/bash" | tee $OUTSH
 echo "# generated " `date` | tee -a $OUTSH
+echo "# via " $0 | tee -a $OUTSH
 find . -maxdepth 1 -type f -name '[CD]SC*' -printf "mkdir ./%TY_%Tm\n" | sort | uniq | tee -a $OUTSH
 find . -maxdepth 1 -type f -name '[CD]SC*' -printf "mv --no-clobber %h/%f ./%TY_%Tm/%f\n" | tee -a $OUTSH
 

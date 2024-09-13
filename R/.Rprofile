@@ -31,12 +31,12 @@ local({
 	suppressMessages({
 		if (require(drat,quietly=TRUE)) {
 			options(dratRepo="/home/spav/github/drat")
-			drat:::addRepo("eddelbuettel")
-			drat:::addRepo('shabbychef')
-			drat:::addRepo('ghrr')
+			#drat:::addRepo("eddelbuettel")
+			#drat:::addRepo('shabbychef')
+			#drat:::addRepo('ghrr')
 			# local
-			drat:::addRepo('localRepo','file:///srv/rsync/shares/lran')
-			drat:::addRepo('localRepo','file:///home/spav/github/drat')
+			#drat:::addRepo('localRepo','file:///srv/rsync/shares/lran')
+			#drat:::addRepo('localRepo','file:///home/spav/github/drat')
 		}
 	})
 })
@@ -110,6 +110,32 @@ if (interactive()) {
 	}
 
 	suppressMessages(require(devtools))
+	if (require(ggplot2)) {
+		theme_set(theme_minimal(base_size=12))
+		theme_update(legend.position="bottom")
+
+		if (require(viridis,quietly=TRUE)) {
+			scale_colour_discrete <- function(...) {
+				require(viridis,quietly=TRUE)
+				scale_color_viridis(discrete=TRUE,end=0.85,option='D',...)
+			}
+			scale_fill_discrete <- function(...) {
+				require(viridis,quietly=TRUE)
+				scale_fill_viridis(discrete=TRUE,end=0.85,option='D',...)
+			}
+			# wait, can I also default for continuous cases?
+			scale_colour_continuous <- function(...) {
+				require(viridis,quietly=TRUE)
+				scale_color_viridis(discrete=FALSE,end=0.85,option='D',...)
+			}
+			scale_fill_continuous <- function(...) {
+				require(viridis,quietly=TRUE)
+				scale_fill_viridis(discrete=FALSE,end=0.85,option='D',...)
+			}
+		}
+	}
+
+
 }
 
 # called on startup
