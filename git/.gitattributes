@@ -1,0 +1,10 @@
+# for R packages 
+DESCRIPTION text
+NAMESPACE text
+*.md text
+
+# these files are binaries and should not be modified
+*.png binary
+*.jpg binary
+*.pdf binary
+

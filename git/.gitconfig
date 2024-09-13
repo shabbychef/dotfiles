@@ -1,0 +1,42 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+  name = Steven Pav
+  email = shabbychef@gmail.com
+[push]
+  default = current
+  autoSetupRemote = true
+[alias]
+  br = branch
+  stat = status
+  st = status
+  df = diff
+  dif = diff
+  dft = difftool
+  ci = commit
+  pul = pull
+  pus = push
+  up = push
+  dn = pull
+[credential]
+  helper = store
+[core]
+  excludesfile = /home/spav/.gitignore
+  attributesfile = /home/spav/.gitattributes
+	editor = vim
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[diff]
+	colorMoved = zebra
+[color]
+	ui = true
+	status = always
+[filter "lfs"]
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+[diff "lfs"]
+	textconv = cat

@@ -16,6 +16,7 @@ stow tmux
 stow screen
 stow hg
 stow abcde
+stow --dotfiles git
 cd ~/.vim && make all && cd -
 ```
 
