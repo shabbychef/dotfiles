@@ -85,6 +85,9 @@ Bundle 'tpope/vim-speeddating'
 " for colors?
 Bundle 'altercation/vim-colors-solarized'
 
+" try to get conque on nickel
+Bundle 'goballooning/vim-conque'
+
 " get one of these:
 " http://vim.wikia.com/wiki/Snippet_Plugin_Comparison
 " Bundle 'tomtom/tskeleton_vim'
@@ -194,6 +197,11 @@ let g:org_todo_keywords=['TODO','DONE','WONT']
   endif
 "}}}
 	
+	" great in F1 session, but terrible over ssh
+	"colorscheme solarized
+	" ok over ssh.
+	colorscheme darkblue
+
 "gui stuff"{{{
 " see also .gvimrc
 	if has("gui_running")

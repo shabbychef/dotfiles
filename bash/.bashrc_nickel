@@ -46,11 +46,15 @@ export LESSOPEN='|/bin/lesspipe %s'
 alias dc='docker-compose'
 alias dcr='docker-compose run'
 alias dcrr='docker-compose run --rm'
+alias hed='head -n $(( $(tput lines) - 2))'
+alias tal='tail -n $(( $(tput lines) - 2))'
 
 export HISTCONTROL=ignorespace
 
 tpush() {
-  pushd ~/github/varo/data-raw/ts/summary
+  #VARO=~/github/varo
+  VARO=/opt/spav/github/varo
+  pushd $VARO/data-raw/ts/summary
   git add ts_exotic*csv ts_sum*csv
   git commit -m 'data from nickel'
   git push
