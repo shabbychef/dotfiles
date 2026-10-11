@@ -1,0 +1,6 @@
+#!/bin/bash -e
+# 
+# make a bash function out of stdin.
+
+perl -pe 'BEGIN { @chars=('a'..'z'); $zot="run_"; $zot = $zot . $chars[rand 26] for 1..20; print $zot, "() {\n"; } s/^    //;$_ = "    " . $_; END { print "}\n$zot\n" }'
+
