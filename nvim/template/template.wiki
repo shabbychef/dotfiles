@@ -1,0 +1,35 @@
+:silent! % s/MY_FULL_NAME/\=g:my_name/ge
+:silent! % s/MY_EMAIL/\=g:my_email/ge
+:silent! % s/CURRENT_PROJECT/\=g:current_project/ge
+:silent! % s/CURRENT_BRANCH/\=g:current_branch/ge
+:silent! % s/EMAILATAT/\=substitute($EMAIL,"@","@@","")/ge
+:silent! % s/EMAIL/\=$EMAIL/ge
+:silent! % s/HEADDATE/\=strftime('%a %b %d %Y')/ge
+:silent! % s/LINEDATE/\=strftime('%Y-%m-%d %X')/ge
+:if search('<+TODO+>')
+:  normal! dd
+:  .-1read ~/sep/wiki/latest_todo.wiki
+:endif
+:if search('<+BUDGET+>')
+:  normal! dd
+:  .-1read ~/sep/wiki/budget_headline.wiki
+:endif
+:if search('<+CURSOR+>')
+:  normal! "_da>
+:endif
+:finish
+
+= HEADDATE =
+<+TODO+>
+
+--------
+
+=== LINEDATE ===
+
+(tags :CURRENT_PROJECT: )
+
+{{{bash
+ggoto CURRENT_BRANCH
+}}}
+
+<+CURSOR+>

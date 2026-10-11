@@ -7,16 +7,17 @@ pushd ~/
 git clone https://github.com/shabbychef/dotfiles.git .dotfiles
 cd .dotfiles
 sudo apt-get install stow
-stow vim
+# stow vim
 stow R
 stow bash
 stow ctags
 stow less
-stow tmux
+# stow tmux
 stow screen
-stow hg
-stow abcde
+# stow hg
+# stow abcde
 stow --dotfiles git
-cd ~/.vim && make all && cd -
+# cd ~/.vim && make all && cd -
+stow --target ~/.config nvim
 ```
 

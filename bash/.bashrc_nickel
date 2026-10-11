@@ -37,6 +37,7 @@ export FULL_NAME='Steven E. Pav'
 
 # gone goodbye
 #export R_QUANDL_AUTH=ASDFASDFSADFSDFSADFASDFASDFASDF
+export PUSHBULLET_TOKEN="o.r8ZcuZYnzqrgBV0jNlDSPiCARFVBU6sf"
 
 export GOPATH=/home/spav/gocode
 export PATH=$PATH:$GOPATH/bin
@@ -56,6 +57,9 @@ tpush() {
   git push
   popd
 }
+
+# for gemini
+export NO_BROWSER=true
 
 # why do I have to do this now? ack.
 export SRV=/srv
