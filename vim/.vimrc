@@ -102,6 +102,7 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'michal-h21/vim-zettel'
+Plugin 'NoahTheDuke/vim-just'
 
 filetype plugin indent on     " required!
 

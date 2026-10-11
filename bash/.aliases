@@ -26,6 +26,9 @@ lsth() {
 lsthed() {
 	ls -Alht $@ | head -n $(( $(tput lines) - 2))
 }
+gst() {
+	git status 
+}
 gsthed() {
 	git status | head -n $(( $(tput lines) - 2))
 }
@@ -73,9 +76,11 @@ alias dcr='docker-compose run'
 alias dcrr='docker-compose run --rm'
 alias dockviz='docker run --rm -v /var/run/docker.sock:/var/run/docker.sock nate/dockviz'
 
-alias amazon='nohup google-chrome-beta www.amazon.com'
-alias netflix='nohup google-chrome-stable www.netflix.com'
+#alias amazon='nohup google-chrome-beta www.amazon.com'
+#alias netflix='nohup google-chrome-stable www.netflix.com'
 alias unspace='rename "s/ /_/g"'
+# now antigravity ... 
+alias gemini='agy'
 
 alias hed='head -n $(( $(tput lines) - 2))'
 alias tal='tail -n $(( $(tput lines) - 2))'
