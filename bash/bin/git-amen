@@ -1,0 +1,41 @@
+#!/bin/bash -e
+# 
+# amends the most recent git commit message to
+# reflect the actual changes.
+    
+HELP_STRING="git amen [-m commit_topline_text] [-n] [-v]";
+TOPLINE=""
+DRYRUN=0
+VERBOSE=0
+
+while getopts "m:nhv" flag
+do
+  case "$flag" in
+  (h) echo "$HELP_STRING";
+      exit 0;;
+  (v) VERBOSE=1;;
+  (n) DRYRUN=1;;
+  (m) TOPLINE=$OPTARG;;
+esac
+done
+shift $((OPTIND-1))
+
+GDIFF=$(git log -n 1 -p)
+
+BASIC_PROMPT="Write a CONCISE conventional git commit message for this git diff. Output ONLY the message. The linewidth shall be 72 characters. Lines shall be separated by newlines. The last line shall be 'commit summary written by gemini.' "
+
+# Ask Gemini to write the message
+if [[ -z "$TOPLINE" ]]; then
+    PROMPT="$BASIC_PROMPT Keep the previous commit's first line as the first line of the commit message, followed by two newlines."
+else
+    PROMPT="$BASIC_PROMPT The first line of the commit message shall be only '${TOPLINE}', followed by two newlines."
+fi
+
+MSG=$(echo "$GDIFF" | gemini "${PROMPT}")
+
+if [ "$DRYRUN" -eq 0 ]; then
+    git commit --amend -m "$MSG"
+else
+    echo 'would do git commit --amend -m "'$MSG'"'
+fi
+

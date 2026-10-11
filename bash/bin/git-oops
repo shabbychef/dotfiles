@@ -1,0 +1,25 @@
+#!/bin/bash -e
+# 
+# critique git changes.
+    
+HELP_STRING="git oops [-v]";
+VERBOSE=0
+
+while getopts "hv" flag
+do
+  case "$flag" in
+  (h) echo "$HELP_STRING";
+      exit 0;;
+  (v) VERBOSE=1;;
+esac
+done
+shift $((OPTIND-1))
+
+GDIFF=$(git diff)
+
+BASIC_PROMPT="Look at this git diff and find any potential issues with commiting this code. Be concise."
+
+export NODE_OPTIONS="--no-deprecation"
+MSG=$(echo "$GDIFF" | gemini "${BASIC_PROMPT}")
+echo "$MSG"
+

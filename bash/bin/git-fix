@@ -1,0 +1,7 @@
+#!/bin/bash -e
+# 
+# fix it.
+    
+echo "fixing issues with git lfs"
+git rm --cached -r . && git reset --hard
+

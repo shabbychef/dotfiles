@@ -1,0 +1,37 @@
+#!/bin/bash
+set -e
+
+# 1. Get the current branch name
+BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+if [ -z "$BRANCH" ] || [ "$BRANCH" == "HEAD" ]; then
+    echo "Error: Could not get a valid branch name. You might be in a detached HEAD state." >&2
+    exit 1
+fi
+
+# 2. Get the URL of the 'origin' remote
+REMOTE_URL=$(git remote get-url origin 2>/dev/null)
+if [ -z "$REMOTE_URL" ]; then
+    echo "Error: Could not find a git remote named 'origin'." >&2
+    exit 1
+fi
+
+# 3. Parse the 'organization/repository' from both SSH and HTTPS URLs
+# First, remove the prefix (everything up to the ':' or '/')
+ORG_REPO_WITH_GIT=$(echo "$REMOTE_URL" | sed -e 's/.*github.com[:/]//')
+# Now, remove the '.git' suffix
+ORG_REPO=$(echo "$ORG_REPO_WITH_GIT" | sed -e 's/\.git$//')
+
+if [ -z "$ORG_REPO" ]; then
+    echo "Error: Could not parse organization/repository from remote URL: $REMOTE_URL" >&2
+    exit 1
+fi
+
+# 4. Construct and echo the final URL
+PR_URL="https://github.com/$ORG_REPO/pull/new/$BRANCH"
+PR_NUM_URL="https://github.com/$ORG_REPO/pull/#"
+
+# echo "URL to create a Pull Request for branch '$BRANCH':"
+echo "Go to [[${PR_URL}|github]] and open a [[${PR_NUM_URL}|PR]]"
+
+#for vim modeline: (do not edit)
+# vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=sh:ft=sh:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:

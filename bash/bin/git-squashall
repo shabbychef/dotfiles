@@ -1,0 +1,88 @@
+#!/bin/bash
+
+set -e # Exit on error
+
+# Default values
+DRY_RUN=false
+COMMIT_MESSAGE=""
+
+# Usage function
+usage() {
+  echo "Usage: $0 [-n] [-m "commit message"] <N>"
+  echo "  -n: Dry run. Show commands without executing."
+  echo "  -m: The new commit message for the squashed commit."
+  echo "      If not provided, the message from the most recent commit will be used."
+  echo "  <N>: The number of last commits to squash."
+  exit 1
+}
+
+# Parse options
+while getopts "nm:" opt; do
+  case "$opt" in
+    n)
+      DRY_RUN=true
+      ;;
+    m)
+      COMMIT_MESSAGE="$OPTARG"
+      ;;
+    \?)
+      usage
+      ;;
+  esac
+done
+
+# Shift off the options that have been processed by getopts
+shift $((OPTIND - 1))
+
+# Check for N, the number of commits
+if [ -z "$1" ]; then
+  echo "Error: Number of commits to squash (N) is required."
+  usage
+fi
+
+N=$1
+
+# Validate that N is a positive integer
+if ! [[ "$N" =~ ^[0-9]+$ ]] || [ "$N" -le 0 ]; then
+    echo "Error: N must be a positive integer."
+    usage
+fi
+
+# --- Main Logic ---
+
+echo "This will squash the last $N commits."
+
+if [ "$DRY_RUN" = true ]; then
+  echo "--- DRY RUN ---"
+  echo "Would execute the following commands:"
+  echo "git reset --soft HEAD~$N"
+  if [ -n "$COMMIT_MESSAGE" ]; then
+    # Use the message from the -m flag
+    echo "git commit -m "$COMMIT_MESSAGE""
+  else
+    # Reuse the message from the commit we are about to squash from (the old HEAD)
+    echo "git commit --reuse-message=HEAD"
+  fi
+  echo "Note: In a real run, HEAD@{1} would be used to get the previous commit message."
+else
+  echo "Running..."
+  
+  # Reset the HEAD back N commits, but keep all the file changes in the staging area.
+  git reset --soft "HEAD~$N"
+  
+  # Commit the staged changes.
+  if [ -z "$COMMIT_MESSAGE" ]; then
+      # If no message was provided with -m, reuse the message from the original HEAD.
+      # HEAD@{1} refers to where HEAD was before the 'git reset' command.
+      echo "Committing with message from original HEAD."
+      git commit --reuse-message=HEAD@{1}
+  else
+      # Use the commit message provided by the user.
+      echo "Committing with new message."
+      git commit -m "$COMMIT_MESSAGE"
+  fi
+  
+  echo "Squash complete."
+fi
+
+exit 0

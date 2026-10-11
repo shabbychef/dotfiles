@@ -1,0 +1,93 @@
+#!/bin/bash
+
+set -e # Exit on error
+
+# Function to show usage
+usage() {
+  echo "$0: get my open PRs in this directory and format them nicely for vimwiki."
+  echo "Usage: $0 [-C WORKDIR] [-L LIMIT] [-M] [-a] [-h]"
+  echo "  -C WORKDIR  Comma-separated list of directories for the git repository (default: .)"
+  echo "  -L LIMIT    The number of PRs to retrieve (default: 10)"
+  echo "  -M          Output in vanilla markdown format"
+  echo "  -a          Show all PRs (including closed/merged)"
+  echo "  -h          Show this help message"
+  exit 1
+}
+
+# Default working directory and limit
+WORKDIR="."
+LIMIT=10
+MARKDOWN_FORMAT=false
+SHOW_ALL="false"
+
+# Parse flags
+while getopts "C:L:hMa" opt; do
+  case $opt in
+    C)
+      WORKDIR=$OPTARG
+      ;;
+    L)
+      LIMIT=$OPTARG
+      ;;
+    h)
+      usage
+      ;;
+    M)
+      MARKDOWN_FORMAT=true
+      ;;
+    a)
+      SHOW_ALL="true"
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      usage
+      ;;
+  esac
+done
+
+
+# Split the WORKDIR string by commas into an array
+IFS=',' read -ra DIRS <<< "$WORKDIR"
+
+for DIR in "${DIRS[@]}"; do
+  # Expand tilde to home directory
+  DIR="${DIR/#\~/$HOME}"
+  # Check if the directory exists
+  if [[ ! -d "$DIR" ]]; then
+    echo "Error: Directory '$DIR' does not exist." >&2
+    continue
+  fi
+
+  # Execute gh in the specified directory
+  (
+    cd "$DIR" || exit 1
+    repo_name=$(gh repo view --json name --jq .name)
+    if [ "$MARKDOWN_FORMAT" = true ]; then
+      echo "* \`$repo_name\`"
+      gh pr list --author '@me' --state all --limit "$LIMIT" --json state,isDraft,number,title,url,reviewDecision | \
+        jq -r --arg repo_name "$repo_name" --arg show_all "$SHOW_ALL" '.[] |
+          select(.state == "OPEN" or $show_all == "true") |
+          "  * " + (
+            if .state == "MERGED" then "✅"
+            elif .state == "CLOSED" then "❌"
+            elif .isDraft then "🚧"
+            elif .reviewDecision == "APPROVED" then "🚀"
+            elif .state == "OPEN" then "✔️"
+            else "❌" end
+          ) + " [" + $repo_name + " PR #" + (.number|tostring) + ": " + .title + "](" + .url + ")"
+        '
+    else
+      echo "* [ ] \`$repo_name\`"
+      gh pr list --author '@me' --state all --limit "$LIMIT" --json state,isDraft,number,title,url,reviewDecision | \
+        jq -r --arg show_all "$SHOW_ALL" '.[] |
+          select(.state == "OPEN" or $show_all == "true") |
+          "    * [" + (
+            if .state == "MERGED" then "X"
+            elif .state == "CLOSED" then "-"
+            elif .isDraft then " "
+            elif .reviewDecision == "APPROVED" then "O"
+            else "." end
+          ) + "] [[" + .url + "|PR #" + (.number|tostring) + "]]: " + .title'
+    fi
+  )
+done

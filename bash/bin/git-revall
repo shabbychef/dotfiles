@@ -1,0 +1,165 @@
+#!/bin/bash
+#
+# Reverts the last N commits.
+#
+# Usage: git revall [-s] [-v] [-n] [-f] <number_of_commits>
+#
+# Options:
+#   -s   Revert all changes in a single commit (squash).
+#   -v   Enable verbose output.
+#   -n   Show what would be done (dry-run).
+#   -f   Bypass confirmation prompt (force).
+#   -h   Display this help message.
+
+set -e
+
+usage() {
+    echo "Usage: git revall [-svnfh] <number>"
+    echo "Reverts a specified number of recent, non-merge commits."
+    echo
+    echo "This script finds the <number> most recent commits that are NOT merge commits"
+    echo "and reverts them. It searches backwards from HEAD, skipping over any merge"
+    echo "commits until it has collected <number> non-merge commits to operate on."
+    echo
+    echo "Options:"
+    echo "  -s   Revert all changes in a single commit (squash)."
+    echo "  -v   Enable verbose output."
+    echo "  -n   Show what would be done (dry-run)."
+    echo "  -f   Bypass confirmation prompt (force)."
+    echo "  -h   Display this help message."
+    exit 1
+}
+
+# Helper for logging verbose output
+log_verbose() {
+    if [ "$VERBOSE" = true ]; then
+        echo "$@"
+    fi
+}
+
+# Flag defaults
+SQUASH=false
+VERBOSE=false
+DRY_RUN=false
+FORCE=false
+
+while getopts "svnfh" flag
+do
+    case "$flag" in
+        (h) usage;;
+        (s) SQUASH=true;;
+        (v) VERBOSE=true;;
+        (n) DRY_RUN=true;;
+        (f) FORCE=true;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+if [[ -z "$1" ]] || ! [[ "$1" =~ ^[0-9]+$ ]] || [[ "$1" -le 0 ]]; then
+    usage
+fi
+
+NUM_COMMITS=$1
+COMMIT_HASHES=$(git log --no-merges --pretty=%H -n "$NUM_COMMITS")
+ACTUAL_NUM_COMMITS=$(echo "$COMMIT_HASHES" | wc -w | xargs) # xargs trims whitespace
+
+if [ "$ACTUAL_NUM_COMMITS" -lt "$NUM_COMMITS" ]; then
+    log_verbose "Warning: You asked to revert $NUM_COMMITS commits, but only found $ACTUAL_NUM_COMMITS non-merge commits to revert."
+    NUM_COMMITS=$ACTUAL_NUM_COMMITS
+    if [ "$NUM_COMMITS" -eq 0 ]; then
+        log_verbose "No commits to revert."
+        exit 0
+    fi
+fi
+
+if [ "$NUM_COMMITS" -eq 0 ]; then
+    log_verbose "No commits to revert."
+    exit 0
+fi
+
+COMMIT_RANGE="HEAD~$NUM_COMMITS..HEAD"
+
+# --- Dry Run Logic ---
+if [ "$DRY_RUN" = true ]; then
+    echo "(Dry Run) Plan for reverting $NUM_COMMITS non-merge commits:"
+    git log --oneline --no-merges -n "$NUM_COMMITS"
+    echo
+    if [ "$SQUASH" = true ]; then
+        COMMIT_SUBJECT="Revert: Squashed revert of $NUM_COMMITS commits"
+        REVERTED_COMMITS_LOG=$(git log --oneline --no-merges -n "$NUM_COMMITS")
+        COMMIT_BODY=$(cat <<EOF
+This reverts the following commits:
+
+${REVERTED_COMMITS_LOG}
+EOF
+)
+        echo "Would perform a squashed revert with the following commit message:"
+        echo "---"
+        echo "$COMMIT_SUBJECT"
+        echo
+        echo "$COMMIT_BODY"
+        echo "---"
+    else
+        echo "Would revert the following commits sequentially (oldest first):"
+        echo "$COMMIT_HASHES" | tac | while read -r commit_hash; do
+             echo "- $(git log -n 1 --oneline "$commit_hash")"
+        done
+    fi
+    exit 0
+fi
+
+# --- Execution Logic ---
+log_verbose "This will revert the following $NUM_COMMITS non-merge commits:"
+if [ "$VERBOSE" = true ]; then
+    git log --oneline --no-merges -n "$NUM_COMMITS"
+    echo
+fi
+
+if [ "$FORCE" = false ]; then
+    read -p "Proceed with revert? (y/n) " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "Aborted."
+        exit 1
+    fi
+else
+    log_verbose "Forcing revert without confirmation."
+fi
+
+if [ "$SQUASH" = true ]; then
+    log_verbose "Reverting $NUM_COMMITS commits into a single new commit."
+    if git revert --no-commit $COMMIT_HASHES; then
+        COMMIT_SUBJECT="Revert: Squashed revert of $NUM_COMMITS commits"
+        REVERTED_COMMITS_LOG=$(git log --oneline --no-merges -n "$NUM_COMMITS")
+        COMMIT_BODY=$(cat <<EOF
+This reverts the following commits:
+
+${REVERTED_COMMITS_LOG}
+EOF
+)
+        git commit -m "$COMMIT_SUBJECT" -m "$COMMIT_BODY"
+        log_verbose "Successfully reverted $NUM_COMMITS commits in one commit."
+    else
+        echo "Error during 'git revert'. Please resolve conflicts and run 'git commit'." >&2
+        echo "To abort, run 'git revert --abort'." >&2
+        exit 1
+    fi
+else
+    log_verbose "Reverting $NUM_COMMITS commits sequentially."
+    echo "$COMMIT_HASHES" | tac | while read -r commit_hash; do
+        log_verbose "- Reverting $(git log -n 1 --oneline "$commit_hash")"
+        if ! git revert --no-edit "$commit_hash"; then
+            echo
+            echo "Error: Failed to revert commit $commit_hash." >&2
+            echo "Please resolve the conflicts manually, then run 'git revert --continue'." >&2
+            echo "To cancel this revert, run 'git revert --abort'." >&2
+            exit 1
+        fi
+    done
+    log_verbose 
+    log_verbose "Successfully reverted $NUM_COMMITS commits."
+fi
+
+#for vim modeline: (do not edit)
+# vim:ts=2:sw=2:tw=79:fdm=marker:fmr=FOLDUP,UNFOLD:cms=#%s:syn=sh:ft=sh:ai:si:cin:nu:fo=croql:cino=p0t0c5(0:

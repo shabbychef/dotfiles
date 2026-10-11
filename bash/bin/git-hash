@@ -1,0 +1,6 @@
+#!/bin/bash -e
+# 
+# hash it.
+    
+git rev-parse HEAD
+

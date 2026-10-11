@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e # Exit on error
+
+# Usage function
+usage() {
+  echo "Usage: $0"
+  exit 1
+}
+  
+# do em both, belt and suspenders
+git submodule update --init --recursive
+git submodule update --recursive
+

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -e # Exit on error
+
+# Usage function
+usage() {
+  echo "Usage: $0 <N>"
+  echo "  <N>: The PR number to review."
+  exit 1
+}
+
+PR_NUMBER="$1"
+PR_FILE="pr_${PR_NUMBER}.md"
+gh pr checkout ${PR_NUMBER}
+
+gh pr view > $PR_FILE
+echo "" >> $PR_FILE
+echo "##########################" >> $PR_FILE
+echo "diff from this PR:" >> $PR_FILE
+gh pr diff >> $PR_FILE
+echo "##########################" >> $PR_FILE
+echo "comments on this PR:" >> $PR_FILE
+gh pr view --comments >> $PR_FILE
+echo "##########################" >> $PR_FILE
+
+PROMPT=$(cat <<EOF
+I am looking at git PR ${PR_NUMBER}; I have checked out the PR, then dumped the pr view, diff, and comments to ${PR_FILE}.  
+Please 
+1. describe the changes in this PR.
+2. list any issues you see with the changes in this PR.
+3. suggest any improvements to the code in this PR.
+4. describe how to address the comments to this PR.
+
+Write your response in pure markdown.
+EOF
+)
+
+# echo ${PROMPT}
+echo ${PROMPT} | gemini | tee review_${PR_NUMBER}.md

@@ -1,0 +1,20 @@
+#!/bin/bash -e
+# 
+# suggest the git commit
+
+# fix a rename . tricky.
+gitchanges() {
+  git status --porcelain 2>/dev/null | grep -v '^?' | grep -P '^(\s*M|[ADM]\s+)' | perl -pe 's/^(\s+M|MM|[ADM]\s)//;' | grep -v 'car_demo'
+}
+suggit() {
+  # why run gitchanges twice? 
+  # b/c something someting newlines, bash and perl. sorry.
+  local changebits=$(gitchanges)
+  case $changebits in
+  (*[![:blank:]]*) gitchanges | perl -pe 'BEGIN { print "git ci \\\n" } s/$/ \\/; END { print "-m \"message\"\n" }';;
+  (*) echo 'no changes to check in'
+  esac
+  popd > /dev/null
+}
+
+suggit "$@"

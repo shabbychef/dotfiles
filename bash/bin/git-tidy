@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -e
+
+# Default working directory
+WORKDIR="."
+
+# Parse flags
+while getopts "C:" opt; do
+  case $opt in
+    C)
+      WORKDIR=$OPTARG
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+  esac
+done
+
+# Change to the specified directory
+cd "$WORKDIR" || exit 1
+
+# Get the current branch name
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Get the list of branches that are "gone"
+gone_branches=$(git branch -vv | grep ': gone]' | awk '{print $1}')
+
+# Check if there are any gone branches
+if [ -z "$gone_branches" ]; then
+  echo "No branches to clean up."
+  exit 0
+fi
+
+for branch in $gone_branches; do
+  if [ "$branch" == "$current_branch" ]; then
+    echo "Warning: The current branch '$branch' has been merged and deleted on the remote."
+  else
+    read -p "Delete branch '$branch'? [y/N] " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      git branch -D "$branch"
+    fi
+  fi
+done
